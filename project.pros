@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "DriverC -767",
+    "project_name": "Driver_Contro",
     "target": "v5",
     "templates": {
       "EZ-Template": {
@@ -424,8 +424,8 @@
       }
     },
     "upload_options": {
-      "description": "DriverC_67l",
-      "icon": "pros",
+      "description": "6-7",
+      "icon": "pizza",
       "after": "screen"
     },
     "use_early_access": false
