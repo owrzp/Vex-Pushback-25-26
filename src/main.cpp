@@ -263,10 +263,10 @@ void opcontrol() {
     // . . .
  // Hood control
     if (master.get_digital(DIGITAL_L1)) {
-      hood_motor.move_velocity(300);
+      hood_motor.move_velocity(500);
     }
     else if (master.get_digital(DIGITAL_L2)) {
-      hood_motor.move_velocity(-300);
+      hood_motor.move_velocity(-500);
     } else {
       hood_motor.move_velocity(0);
     }
