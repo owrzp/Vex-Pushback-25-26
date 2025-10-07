@@ -237,12 +237,8 @@ void opcontrol() {
   pros::Motor combine_motor (COMBINE_MOTOR_PORT);
   pros::Motor hood_motor (HOOD_MOTOR_PORT);
   pros::Motor intake_motor (INTAKE_MOTOR_PORT);
-  pros::MotorGroup motor_group_intake ({-INTAKE_MOTOR_PORT, COMBINE_MOTOR_PORT, HOOD_MOTOR_PORT}); // Intake and Combine motors
+  pros::MotorGroup motor_group_intake ({-INTAKE_MOTOR_PORT, COMBINE_MOTOR_PORT}); // Intake and Combine motors
   pros::adi::Pneumatics block_collector('A', false); // Pneumatic for the block collector
-  bool R1motor_on = false; 
-  bool R1was_pressed = false;
-  bool R2motor_on = false;
-  bool R2was_pressed = false;
   bool toggle = false;
 	bool latch = false;
 
@@ -265,38 +261,25 @@ void opcontrol() {
     // . . .
     // Put more user control code here!
     // . . .
-  
-    // MAYBE?  If the below flips back and forth too quick.
-
+ // Hood control
+    if (master.get_digital(DIGITAL_L1)) {
+      hood_motor.move_velocity(300);
+    }
+    else if (master.get_digital(DIGITAL_L2)) {
+      hood_motor.move_velocity(-300);
+    } else {
+      hood_motor.move_velocity(0);
+    }
     //Intake control
-    bool R1is_pressed = master.get_digital(DIGITAL_R1);
-
-    if (R1is_pressed && !R1was_pressed) {
-        R1motor_on = !R1motor_on; 
+     if (master.get_digital(DIGITAL_R1)) {
+      motor_group_intake.move_velocity(300);
     }
-    R1was_pressed = R1is_pressed;
-
-    if (R1motor_on) {
-        motor_group_intake.move_velocity(-200); 
+    else if (master.get_digital(DIGITAL_R2)) {
+      motor_group_intake.move_velocity(-300);
     } else {
-        motor_group_intake.move_velocity(0); 
+      motor_group_intake.move_velocity(0);
     }
-    
-   bool R2is_pressed = master.get_digital(DIGITAL_R2);
-
-    if (R2is_pressed && !R2was_pressed) {
-        R2motor_on = !R2motor_on; 
-    }
-    R2was_pressed = R2is_pressed;
-
-    if (R2motor_on) {
-        motor_group_intake.move_velocity(200); 
-    } else {
-        if (!R1motor_on) {
-            motor_group_intake.move_velocity(0); 
-        }
-    }
-//Pneumatic control
+      //Pneumatic control
 bool b_button = master.get_digital(DIGITAL_B);
 	
 	if (toggle){
@@ -319,4 +302,4 @@ bool b_button = master.get_digital(DIGITAL_B);
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
-}
+    }
