@@ -241,8 +241,10 @@ void opcontrol() {
   pros::adi::Pneumatics block_collector('A', false); // Pneumatic for the block collector
   bool toggle = false;
 	bool latch = false;
-
-
+  bool Xwas_pressed = false;
+  bool X_Motor_Slow = false;
+  int x= 300;
+  int y= -300;
 
 
   // This is preference to what you like to drive on
@@ -261,28 +263,56 @@ void opcontrol() {
     // . . .
     // Put more user control code here!
     // . . .
- // Hood control
+    // Hood control
     if (master.get_digital(DIGITAL_L1)) {
-      hood_motor.move_velocity(500);
+      hood_motor.move_velocity(600);
     }
     else if (master.get_digital(DIGITAL_L2)) {
-      hood_motor.move_velocity(-500);
+      hood_motor.move_velocity(-600);
     } else {
       hood_motor.move_velocity(0);
     }
-    //Intake control
-     if (master.get_digital(DIGITAL_R1)) {
-      motor_group_intake.move_velocity(300);
+
+    //Combine control
+    bool Xis_pressed = master.get_digital(DIGITAL_X);
+
+    if (Xis_pressed && !Xwas_pressed) {
+        X_Motor_Slow = !X_Motor_Slow; 
+    }
+//maybe switch is and was to get different results
+    Xwas_pressed = Xis_pressed;
+
+    if (X_Motor_Slow) {
+      x = 100;
+      y = -100;
+    } else {
+      x = 300;
+      y = -300;
+    }
+    
+    if (master.get_digital(DIGITAL_R1)) {
+      combine_motor.move_velocity(x);
     }
     else if (master.get_digital(DIGITAL_R2)) {
-      motor_group_intake.move_velocity(-300);
+      combine_motor.move_velocity(y);
     } else {
-      motor_group_intake.move_velocity(0);
+      combine_motor.move_velocity(0);
     }
-      //Pneumatic control
-bool b_button = master.get_digital(DIGITAL_B);
+  
+    //Intake control
+     if (master.get_digital(DIGITAL_R1)) {
+      intake_motor.move_velocity(-300);
+    }
+    else if (master.get_digital(DIGITAL_R2)) {
+      intake_motor.move_velocity(300);
+    } else {
+      intake_motor.move_velocity(0);
+    }
+
+    //Pneumatic control
+    bool b_button = master.get_digital(DIGITAL_B);
 	
-	if (toggle){
+	  if (toggle){
       block_collector.set_value(true); 
     }
     else {
@@ -294,10 +324,9 @@ bool b_button = master.get_digital(DIGITAL_B);
         toggle = !toggle;
         latch = true;
       }
-    }
-      else {
+    } else {
       latch = false; 
-      }
+    }
   
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
