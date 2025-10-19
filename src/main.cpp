@@ -15,7 +15,7 @@ ez::Drive chassis(
     {-14, 15, -16},     // Left Chassis Ports (negative port will reverse it!)
     {11, -12, 13},  // Right Chassis Ports (negative port will reverse it!)
 
-    7,      // IMU Port
+    5,      // IMU Port
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     360);   // Wheel RPM = cartridge * (motor gear / wheel gear)
 //// EXTRA MOTORS ////
@@ -92,9 +92,8 @@ void disabled() {
  * starts.
  */
 void competition_initialize() {
-  // . . .
+ ez::as::auton_selector.selected_auton_print();
 }
-
 /**
  * Runs the user autonomous code. This function will be started in its own task
  * with the default priority and stack size whenever the robot is enabled via
@@ -202,7 +201,7 @@ void ez_template_extras() {
       chassis.pid_tuner_toggle();
 
     // Trigger the selected autonomous routine
-    if (master.get_digital(DIGITAL_B) && master.get_digital(DIGITAL_DOWN)) {
+    if (master.get_digital(DIGITAL_B) && master.get_digital(DIGITAL_UP)) {
       pros::motor_brake_mode_e_t preference = chassis.drive_brake_get();
       autonomous();
       chassis.drive_brake_set(preference);
@@ -243,8 +242,8 @@ void opcontrol() {
 	bool latch = false;
   bool Xwas_pressed = false;
   bool X_Motor_Slow = false;
-  int x= 300;
-  int y= -300;
+  int x= 200;
+  int y= -200;
 
 
   // This is preference to what you like to drive on
@@ -263,6 +262,8 @@ void opcontrol() {
     // . . .
     // Put more user control code here!
     // . . .
+
+    
     // Hood control
     if (master.get_digital(DIGITAL_L1)) {
       hood_motor.move_velocity(600);
@@ -301,10 +302,10 @@ void opcontrol() {
   
     //Intake control
      if (master.get_digital(DIGITAL_R1)) {
-      intake_motor.move_velocity(-300);
+      intake_motor.move_velocity(-150);
     }
     else if (master.get_digital(DIGITAL_R2)) {
-      intake_motor.move_velocity(300);
+      intake_motor.move_velocity(150);
     } else {
       intake_motor.move_velocity(0);
     }
@@ -327,6 +328,8 @@ void opcontrol() {
     } else {
       latch = false; 
     }
+   
+   
   
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
