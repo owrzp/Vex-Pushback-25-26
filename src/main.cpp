@@ -70,6 +70,7 @@ void initialize() {
   ez::as::auton_selector.autons_add({
     Auton("Drive Example", drive_example),
     Auton("Turn Example", turn_example),
+    Auton("Swing Example", swing_example),
   });
 }
 
