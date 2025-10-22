@@ -35,7 +35,6 @@ ez::Drive chassis(
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
- 
 
   pros::delay(500);  // Stop the user from doing anything while legacy ports configure
 
@@ -71,6 +70,7 @@ void initialize() {
     Auton("Drive Example", drive_example),
     Auton("Turn Example", turn_example),
     Auton("Swing Example", swing_example),
+    Auton("Match Auton", MatchAuton),
   });
 }
 
@@ -111,7 +111,7 @@ void autonomous() {
   chassis.drive_imu_reset();                  // Reset gyro position to 0
   chassis.drive_sensor_reset();               // Reset drive sensors to 0
   chassis.odom_xyt_set(0_in, 0_in, 0_deg);    // Set the current position, you can start at a specific position with this
-  chassis.drive_brake_set(MOTOR_BRAKE_HOLD);  // Set motors to hold.  This helps autonomous consistency
+  chassis.drive_brake_set(MOTOR_BRAKE_COAST);  // Set motors to hold.  This helps autonomous consistency
 
   /*
   Odometry and Pure Pursuit are not magic
@@ -202,7 +202,7 @@ void ez_template_extras() {
       chassis.pid_tuner_toggle();
 
     // Trigger the selected autonomous routine
-    if (master.get_digital(DIGITAL_B) && master.get_digital(DIGITAL_UP)) {
+    if (master.get_digital(DIGITAL_A) && master.get_digital(DIGITAL_UP)) {
       pros::motor_brake_mode_e_t preference = chassis.drive_brake_get();
       autonomous();
       chassis.drive_brake_set(preference);
@@ -243,8 +243,8 @@ void opcontrol() {
 	bool latch = false;
   bool Xwas_pressed = false;
   bool X_Motor_Slow = false;
-  int x= 200;
-  int y= -200;
+  int x= 150;
+  int y= -150;
 
 
   // This is preference to what you like to drive on
