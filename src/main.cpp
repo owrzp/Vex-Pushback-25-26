@@ -70,7 +70,7 @@ void initialize() {
     Auton("Drive Example", drive_example),
     Auton("Turn Example", turn_example),
     Auton("Swing Example", swing_example),
-    Auton("Match Auton", MatchAuton),
+    Auton("Match Auton Right", MatchAutonR),
   });
 }
 
@@ -125,8 +125,8 @@ void autonomous() {
   You can do cool curved motions, but you have to give your robot the best chance
   to be consistent
   */
-
-  ez::as::auton_selector.selected_auton_call();  // Calls selected auton from autonomous selector
+  MatchAutonR();
+  //ez::as::auton_selector.selected_auton_call();  // Calls selected auton from autonomous selector
 }
 
 /**
@@ -179,7 +179,7 @@ void ez_screen_task() {
     pros::delay(ez::util::DELAY_TIME);
   }
 }
-pros::Task ezScreenTask(ez_screen_task);
+// pros::Task ezScreenTask(ez_screen_task);
 
 /**
  * Gives you some extras to run in your opcontrol:

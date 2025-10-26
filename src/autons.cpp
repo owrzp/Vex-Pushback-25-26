@@ -6,9 +6,11 @@
 /////
 
 // These are out of 127
-const int DRIVE_SPEED = 110;
+const int DRIVE_SPEED = 100;
 const int TURN_SPEED = 90;
 const int SWING_SPEED = 110;
+const int DRIVE_SPEED_SLOW = 40;
+const int DRIVE_SPEED_MEDIUM = 70;
 
 ///
 // Constants
@@ -373,15 +375,35 @@ void measure_offsets() {
   if (chassis.odom_tracker_front != nullptr) chassis.odom_tracker_front->distance_to_center_set(f_offset);
 }
 
-void MatchAuton () {
-chassis.pid_drive_set(37_in, DRIVE_SPEED, true);
-chassis.pid_wait();
 
-chassis.pid_turn_set(45_deg, TURN_SPEED);
-}
  // . . .
 // Make your own autonomous functions here!
 // . . .
+void MatchAutonR () {
+    bool collectorExtended = false;
+
+intake_combine.move(-127);  // Start intake to collect blocks
+  chassis.pid_drive_set(33_in, DRIVE_SPEED_MEDIUM, true);
+  chassis.pid_wait(); // Wait to ensure block is secured
+  chassis.pid_drive_set(7_in, 20,true);  // Drive slowly to collect
+  chassis.pid_wait();
+    intake_combine.move(45);  // Stop intake
+  chassis.pid_turn_set(-51_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(13_in, DRIVE_SPEED_SLOW, true);
+  chassis.pid_wait();
+  pros::delay(250);  // Brief pause to stabilize
+  intake_combine.move(127);  // Outtake to score pre-load
+  pros::delay(1000);  // Wait to ensure block is scored
+  chassis.pid_drive_set(-5_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_drive_set(8_in, DRIVE_SPEED, true);  // Drive forward to push block into goal
+  chassis.pid_wait();
+  chassis.pid_drive_set(-49_in, DRIVE_SPEED, true);  // Drive to front of matchloader
+  chassis.pid_wait();
+  chassis.pid_turn_set(140_deg, TURN_SPEED);
+  chassis.pid_wait();
+}
 void Autonomous() {
   chassis.pid_targets_reset();                // Resets PID targets to 0
   chassis.drive_imu_reset();                  // Reset gyro position to 0
@@ -389,7 +411,7 @@ void Autonomous() {
   chassis.odom_xyt_set(0_in, 0_in, 0_deg);    // Set the current position, you can start at a specific position with this
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);  // Set motors to hold.  This helps autonomous consistency
 
-    MatchAuton(); // directly call your function
+    MatchAutonR(); // directly call your function
 
   /*
   Odometry and Pure Pursuit are not magic
