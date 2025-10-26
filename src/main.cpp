@@ -71,6 +71,7 @@ void initialize() {
     Auton("Turn Example", turn_example),
     Auton("Swing Example", swing_example),
     Auton("Match Auton Right", MatchAutonR),
+    Auton("Match Auton Left", MatchAutonL),
   });
 }
 
@@ -125,7 +126,7 @@ void autonomous() {
   You can do cool curved motions, but you have to give your robot the best chance
   to be consistent
   */
-  MatchAutonR();
+  MatchAutonL();
   //ez::as::auton_selector.selected_auton_call();  // Calls selected auton from autonomous selector
 }
 

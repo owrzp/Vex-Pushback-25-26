@@ -10,7 +10,7 @@ const int DRIVE_SPEED = 100;
 const int TURN_SPEED = 90;
 const int SWING_SPEED = 110;
 const int DRIVE_SPEED_SLOW = 40;
-const int DRIVE_SPEED_MEDIUM = 70;
+const int DRIVE_SPEED_MEDIUM = 65;
 
 ///
 // Constants
@@ -86,6 +86,10 @@ void turn_example() {
   chassis.pid_wait();
 }
 
+void drive(int distance){
+  chassis.pid_drive_set(distance,DRIVE_SPEED, true);
+  chassis.pid_wait();
+}
 ///
 // Combining Turn + Drive
 ///
@@ -387,7 +391,7 @@ intake_combine.move(-127);  // Start intake to collect blocks
   chassis.pid_wait(); // Wait to ensure block is secured
   chassis.pid_drive_set(7_in, 20,true);  // Drive slowly to collect
   chassis.pid_wait();
-    intake_combine.move(45);  // Stop intake
+    intake_combine.move(47);  // Stop intake
   chassis.pid_turn_set(-51_deg, TURN_SPEED);
   chassis.pid_wait();
   chassis.pid_drive_set(13_in, DRIVE_SPEED_SLOW, true);
@@ -397,14 +401,57 @@ intake_combine.move(-127);  // Start intake to collect blocks
   pros::delay(1000);  // Wait to ensure block is scored
   chassis.pid_drive_set(-5_in, DRIVE_SPEED, true);
   chassis.pid_wait();
-  chassis.pid_drive_set(8_in, DRIVE_SPEED, true);  // Drive forward to push block into goal
+  chassis.pid_drive_set(8_in, 50, true);  // Drive forward to push block into goal
+  chassis.pid_wait();
+  chassis.pid_drive_set(-50_in, DRIVE_SPEED, true);  // Drive to front of matchloader
+  chassis.pid_wait();
+  chassis.pid_turn_set(-186_deg, TURN_SPEED);
+  chassis.pid_wait();
+  
+  // // Extend the block collector
+  // collectorExtended = true;
+  // block_collector.set_value(collectorExtended);
+  // pros::delay(500);  // Wait 0.5 seconds for pneumatic action
+
+  // // Retract the block collector
+  // collectorExtended = false;
+  // block_collector.set_value(collectorExtended);
+  // pros::delay(300);
+
+}
+
+void MatchAutonL () {
+   intake_combine.move(-127);  // Start intake to collect blocks
+  chassis.pid_drive_set(27_in, DRIVE_SPEED_SLOW, true);
+  chassis.pid_wait();
+  pros::delay(250);  // Brief pause to stabilize
+  chassis.pid_turn_set(67_deg, TURN_SPEED);
+  chassis.pid_wait();
+  hood.move(-50);  // Outtake to score
+  chassis.pid_drive_set(12_in, DRIVE_SPEED_SLOW, true);
+  chassis.pid_wait();
+  pros::delay(3000);  // Wait to ensure block is scored
+  hood.move(0);  // Stop hood motor
+  intake_combine.move(0);  // Stop intake
+  chassis.pid_drive_set(-9_in, DRIVE_SPEED, true); // Back away from goal
+  chassis.pid_wait();
+  chassis.pid_drive_set(16_in, DRIVE_SPEED, true); // Drive into goal to push block in
   chassis.pid_wait();
   chassis.pid_drive_set(-49_in, DRIVE_SPEED, true);  // Drive to front of matchloader
   chassis.pid_wait();
-  chassis.pid_turn_set(140_deg, TURN_SPEED);
+  chassis.pid_turn_set(190_deg, TURN_SPEED);
   chassis.pid_wait();
 }
-void Autonomous() {
+
+void SkillsAutonPark() {
+drive(10_in);
+drive(-10_in);
+}
+  chassis.pid_drive_set(50_in, DRIVE_SPEED, true);  // Drive to front of matchloader
+  chassis.pid_wait();
+
+
+  void Autonomous() {
   chassis.pid_targets_reset();                // Resets PID targets to 0
   chassis.drive_imu_reset();                  // Reset gyro position to 0
   chassis.drive_sensor_reset();               // Reset drive sensors to 0
