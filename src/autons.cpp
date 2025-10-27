@@ -505,6 +505,9 @@ chassis.pid_drive_set(-10_in, 120, true);
 chassis.pid_wait();
 }
 
+void SkillsAuton1() {
+  
+}
 
   void Autonomous() {
   chassis.pid_targets_reset();                // Resets PID targets to 0
