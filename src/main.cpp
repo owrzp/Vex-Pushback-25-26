@@ -72,6 +72,7 @@ void initialize() {
     Auton("Swing Example", swing_example),
     Auton("Match Auton Right", MatchAutonR),
     Auton("Match Auton Left", MatchAutonL),
+    Auton("Skills Auton Park", SkillsAutonPark)
   });
 }
 

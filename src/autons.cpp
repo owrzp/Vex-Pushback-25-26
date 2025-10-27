@@ -86,10 +86,6 @@ void turn_example() {
   chassis.pid_wait();
 }
 
-void drive(int distance){
-  chassis.pid_drive_set(distance,DRIVE_SPEED, true);
-  chassis.pid_wait();
-}
 ///
 // Combining Turn + Drive
 ///
@@ -110,6 +106,10 @@ void drive_and_turn() {
   chassis.pid_wait();
 }
 
+void drive(int distance){
+  chassis.pid_drive_set(distance,DRIVE_SPEED, true);
+  chassis.pid_wait();
+}
 ///
 // Wait Until and Changing Max Speed
 ///
@@ -427,11 +427,11 @@ void MatchAutonL () {
   pros::delay(250);  // Brief pause to stabilize
   chassis.pid_turn_set(67_deg, TURN_SPEED);
   chassis.pid_wait();
-  hood.move(-50);  // Outtake to score
+  hood.move(-90);  // Outtake to score
   chassis.pid_drive_set(12_in, DRIVE_SPEED_SLOW, true);
   chassis.pid_wait();
   pros::delay(3000);  // Wait to ensure block is scored
-  hood.move(0);  // Stop hood motor
+  hood.move(90);  // Stop hood motor
   intake_combine.move(0);  // Stop intake
   chassis.pid_drive_set(-9_in, DRIVE_SPEED, true); // Back away from goal
   chassis.pid_wait();
@@ -444,11 +444,13 @@ void MatchAutonL () {
 }
 
 void SkillsAutonPark() {
-drive(10_in);
-drive(-10_in);
+chassis.pid_drive_set(-10_in, 120, true);
+chassis.pid_wait();
+chassis.pid_drive_set(60_in, 120, true);
+chassis.pid_wait();
+chassis.pid_drive_set(-10_in, 120, true);
+chassis.pid_wait();
 }
-  chassis.pid_drive_set(50_in, DRIVE_SPEED, true);  // Drive to front of matchloader
-  chassis.pid_wait();
 
 
   void Autonomous() {
