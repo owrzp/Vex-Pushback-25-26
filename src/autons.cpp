@@ -386,7 +386,7 @@ void measure_offsets() {
 void MatchAutonR () {
     bool collectorExtended = false;
 
-    intake_combine.move(-127);  // Start intake to collect blocks
+    intake_combine.move(-100);  // Start intake to collect blocks
   chassis.pid_drive_set(33_in, DRIVE_SPEED_MEDIUM, true);
   chassis.pid_wait(); // Wait to ensure block is secured
   chassis.pid_drive_set(7_in, 20,true);  // Drive slowly to collect
@@ -426,15 +426,18 @@ void MatchAutonR () {
   chassis.pid_wait();
   chassis.pid_drive_set(-14_in, DRIVE_SPEED, true);
   chassis.pid_wait();   
+  
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
-  pros::delay(300);
+  pros::delay(800);
 
-  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_turn_set(360_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(-25_in, DRIVE_SPEED_MEDIUM, true);  // Drive to score second block
+  chassis.pid_drive_set(23_in, DRIVE_SPEED_MEDIUM, true);  // Drive to score second block
   chassis.pid_wait();
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
+  intake_combine.move(-127);
+  hood.move(-127);  // Outtake to score
   // // Extend the block collector
   // collectorExtended = true;
   // block_collector.set_value(collectorExtended);
