@@ -474,11 +474,11 @@ void MatchAutonL () {
   chassis.pid_turn_set(190_deg, TURN_SPEED);
   chassis.pid_wait();
 
-collectorExtended = true;
+ collectorExtended = true;
   block_collector.set_value(collectorExtended);
   pros::delay(500);  // Wait 0.5 seconds for pneumatic action
 
-  intake_combine.move(-127);  // Outtake to score pre-load
+   intake_combine.move(-127);  // Outtake to score pre-load
   chassis.pid_drive_set(14_in, DRIVE_SPEED_MEDIUM, true);  // Drive to collect another block
   chassis.pid_wait();
   chassis.pid_drive_set(-3_in, DRIVE_SPEED,true);  // Drive slowly to collect
@@ -487,18 +487,23 @@ collectorExtended = true;
   chassis.pid_wait();
   chassis.pid_drive_set(-3_in, DRIVE_SPEED,true);  // Drive slowly to collect
   chassis.pid_wait();
-  intake_combine.move(40);
-  chassis.pid_drive_set(-14_in, DRIVE_SPEED, true);
+    intake_combine.move(0);
+    intake.move(40);
   chassis.pid_wait();
-
+  chassis.pid_drive_set(-14_in, DRIVE_SPEED, true);
+  chassis.pid_wait();   
+  
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
-  pros::delay(300);
+  pros::delay(800);
 
-chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_turn_set(360_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(-25_in, DRIVE_SPEED_MEDIUM, true);  // Drive to score second block
+  chassis.pid_drive_set(23_in, DRIVE_SPEED_MEDIUM, true);  // Drive to score second block
   chassis.pid_wait();
+  chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
+  intake_combine.move(-127);
+  hood.move(-127);  // Outtake to score
 }
 
 void SkillsAutonPark() {
