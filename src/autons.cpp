@@ -492,7 +492,7 @@ void MatchAutonL () {
   chassis.pid_turn_set(200_deg, TURN_SPEED);
   chassis.pid_wait();
 
-      intake.move(127); 
+    intake.move(127); 
   combine.move(-127);  // Outtake to score pre-load
   chassis.pid_drive_set(17_in, DRIVE_SPEED_MEDIUM, true);  // Drive to collect another block
   chassis.pid_wait();
