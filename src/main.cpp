@@ -127,7 +127,7 @@ void autonomous() {
   You can do cool curved motions, but you have to give your robot the best chance
   to be consistent
   */
-  MatchAutonR();
+  SkillsAuton1();
   // ez::as::auton_selector.selected_auton_call();  // Calls selected auton from autonomous selector
 }
 
@@ -290,8 +290,8 @@ void opcontrol() {
       x = 100;
       y = -100;
     } else {
-      x = 300;
-      y = -300;
+      x = 150;
+      y = -150;
     }
     
     if (master.get_digital(DIGITAL_R1)) {
@@ -305,10 +305,10 @@ void opcontrol() {
   
     //Intake control
      if (master.get_digital(DIGITAL_R1)) {
-      intake_motor.move_velocity(-150);
+      intake_motor.move_velocity(-200);
     }
     else if (master.get_digital(DIGITAL_R2)) {
-      intake_motor.move_velocity(150);
+      intake_motor.move_velocity(200);
     } else {
       intake_motor.move_velocity(0);
     }
