@@ -392,71 +392,63 @@ void turn(okapi::QAngle angle, int speed = TURN_SPEED) {
  // . . .
 // Make your own autonomous functions here!
 // . . .
-void MatchAutonR () {
-    bool collectorExtended = false;
+void MatchAutonR() {
+  bool collectorExtended = false;
 
-    intake.move(100);
-    combine.move(-100);  // Start intake to collect blocks
-  chassis.pid_drive_set(33.5_in, DRIVE_SPEED, true);
-  chassis.pid_wait(); // Wait to ensure block is secured
-  chassis.pid_drive_set(7_in, 20,true);  // Drive slowly to collect
-  chassis.pid_wait();
-    combine.move(47);  // Stop intake
-      intake.move(-47);
+  // ===== Collect First Block =====
+  intake.move(100);
+  combine.move(-100);
+  drive(33.5_in);               // Drive to first block
+  drive(7_in, 20);              // Slowly finish collecting
+  combine.move(47);
+  intake.move(-47);
 
-  chassis.pid_turn_set(-51_deg, TURN_SPEED);
-  chassis.pid_wait();
-  chassis.pid_drive_set(13_in, DRIVE_SPEED_SLOW, true);
-  chassis.pid_wait();
-  pros::delay(250);  // Brief pause to stabilize
-  combine.move(127);  // Outtake to score pre-load
-   intake.move(-127);
+  // ===== Turn and Score Preload =====
+  turn(-51_deg);
+  drive(13_in, DRIVE_SPEED_SLOW);
+  pros::delay(250);
+  combine.move(127);
+  intake.move(-127);
+  pros::delay(1000);
 
-  pros::delay(1000);  // Wait to ensure block is scored
-  chassis.pid_drive_set(-5_in, DRIVE_SPEED, true);
-  chassis.pid_wait();
-  chassis.pid_drive_set(8_in, 50, true);  // Drive forward to push block into goal
-  chassis.pid_wait();
-  chassis.pid_drive_set(-50_in, DRIVE_SPEED, true);  // Drive to front of matchloader
-  chassis.pid_wait();
-  chassis.pid_turn_set(-190_deg, TURN_SPEED);
-  chassis.pid_wait();
-  
+  // ===== Push Into Goal =====
+  drive(-5_in);
+  drive(8_in, 50);
+  drive(-50_in);                // Drive to match loader area
+  turn(-190_deg);
+
+  // ===== Deploy Collector =====
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
-  pros::delay(500);  // Wait 0.5 seconds for pneumatic action
+  pros::delay(500);
 
-    intake.move(127);
-  combine.move(-127);  // Outtake to score pre-load
-  chassis.pid_drive_set(14_in, DRIVE_SPEED_MEDIUM, true);  // Drive to collect another block
-  chassis.pid_wait();
-  chassis.pid_drive_set(-3_in, DRIVE_SPEED,true);  // Drive slowly to collect
-  chassis.pid_wait();
-  chassis.pid_drive_set(3_in, DRIVE_SPEED,true);  // Drive slowly to collect
-  chassis.pid_wait();
-  chassis.pid_drive_set(-3_in, DRIVE_SPEED,true);  // Drive slowly to collect
-  chassis.pid_wait();
-    combine.move(-30);
-    intake.move(40);
-  chassis.pid_wait();
-  chassis.pid_drive_set(-14_in, DRIVE_SPEED, true);
-  chassis.pid_wait();   
-  
+  // ===== Collect Second Block =====
+  intake.move(127);
+  combine.move(-127);
+  drive(14_in, DRIVE_SPEED_MEDIUM);
+  drive(-3_in);
+  drive(3_in);
+  drive(-3_in);
+  combine.move(-30);
+  intake.move(40);
+  drive(-14_in);
+
+  // ===== Retract Collector =====
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
   pros::delay(800);
 
+  // ===== Score Second Block =====
   combine.move(0);
-  chassis.pid_turn_set(358_deg, TURN_SPEED);
-  chassis.pid_wait();
-  chassis.pid_drive_set(9_in, DRIVE_SPEED, true);  // Drive to score second block
-  chassis.pid_wait();
+  turn(358_deg);
+  drive(9_in);
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
-  chassis.pid_wait();
-    intake.move(127);
+
+  intake.move(127);
   combine.move(-127);
   hood.move(-127);
- pros::delay(3000);  // Wait to ensure block is scored
+  pros::delay(3000);
+}
  
  // // Extend the block collector
   // collectorExtended = true;
