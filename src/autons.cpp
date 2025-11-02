@@ -6,10 +6,11 @@
 /////
 
 // These are out of 127
-const int DRIVE_SPEED = 100;
 const int TURN_SPEED = 90;
 const int TURN_SPEED_SLOW = 60;
 const int SWING_SPEED = 110;
+//Drive speeds
+const int DRIVE_SPEED = 100;
 const int DRIVE_SPEED_SLOW = 40;
 const int DRIVE_SPEED_MEDIUM = 65;
 
@@ -389,7 +390,7 @@ void MatchAutonR () {
 
     intake.move(100);
     combine.move(-100);  // Start intake to collect blocks
-  chassis.pid_drive_set(33_in, DRIVE_SPEED_MEDIUM, true);
+  chassis.pid_drive_set(33.5_in, DRIVE_SPEED, true);
   chassis.pid_wait(); // Wait to ensure block is secured
   chassis.pid_drive_set(7_in, 20,true);  // Drive slowly to collect
   chassis.pid_wait();
@@ -428,7 +429,7 @@ void MatchAutonR () {
   chassis.pid_wait();
   chassis.pid_drive_set(-3_in, DRIVE_SPEED,true);  // Drive slowly to collect
   chassis.pid_wait();
-    combine.move(0);
+    combine.move(-30);
     intake.move(40);
   chassis.pid_wait();
   chassis.pid_drive_set(-14_in, DRIVE_SPEED, true);
@@ -438,9 +439,10 @@ void MatchAutonR () {
   block_collector.set_value(collectorExtended);
   pros::delay(800);
 
+  combine.move(0);
   chassis.pid_turn_set(358_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(9_in, DRIVE_SPEED_MEDIUM, true);  // Drive to score second block
+  chassis.pid_drive_set(9_in, DRIVE_SPEED, true);  // Drive to score second block
   chassis.pid_wait();
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
   chassis.pid_wait();
