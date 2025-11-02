@@ -236,12 +236,15 @@ void ez_template_extras() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
+  // Motors
   pros::Controller master (CONTROLLER_MASTER);
   pros::Motor combine_motor (COMBINE_MOTOR_PORT);
   pros::Motor hood_motor (HOOD_MOTOR_PORT);
   pros::Motor intake_motor (INTAKE_MOTOR_PORT);
   pros::MotorGroup motor_group_intake ({-INTAKE_MOTOR_PORT, COMBINE_MOTOR_PORT}); // Intake and Combine motors
   pros::adi::Pneumatics block_collector('A', false); // Pneumatic for the block collector
+  
+  // booleans
   bool toggle = false;
 	bool latch = false;
   bool Xwas_pressed = false;
