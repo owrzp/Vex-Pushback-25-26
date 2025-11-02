@@ -1,4 +1,5 @@
 #include "main.h"
+using namespace okapi;
 
 /////
 // For installation, upgrading, documentations, and tutorials, check out our website!
@@ -108,10 +109,7 @@ void drive_and_turn() {
   chassis.pid_wait();
 }
 
-void drive(int distance){
-  chassis.pid_drive_set(distance,DRIVE_SPEED, true);
-  chassis.pid_wait();
-}
+
 ///
 // Wait Until and Changing Max Speed
 ///
@@ -381,6 +379,15 @@ void measure_offsets() {
   if (chassis.odom_tracker_front != nullptr) chassis.odom_tracker_front->distance_to_center_set(f_offset);
 }
 
+void drive(QLength distance, int speed = DRIVE_SPEED, bool slew = true) {
+  chassis.pid_drive_set(distance, speed, slew);
+  chassis.pid_wait();
+}
+
+void turn(okapi::QAngle angle, int speed = TURN_SPEED) {
+  chassis.pid_turn_set(angle, speed);
+  chassis.pid_wait();
+}
 
  // . . .
 // Make your own autonomous functions here!
