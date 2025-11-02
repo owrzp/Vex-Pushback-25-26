@@ -182,7 +182,7 @@ void ez_screen_task() {
     pros::delay(ez::util::DELAY_TIME);
   }
 }
-// pros::Task ezScreenTask(ez_screen_task);
+pros::Task ezScreenTask(ez_screen_task);
 
 /**
  * Gives you some extras to run in your opcontrol:
