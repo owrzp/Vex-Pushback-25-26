@@ -460,71 +460,64 @@ void MatchAutonR() {
   // block_collector.set_value(collectorExtended);
   // pros::delay(300);
 
-}
 
-void MatchAutonL () {
-    bool collectorExtended = false;
 
-    intake.move(80);
-   combine.move(-80);  // Start intake to collect blocks
-  chassis.pid_drive_set(28_in, DRIVE_SPEED_SLOW, true);
-  chassis.pid_wait();
-   intake.move(40);
-  combine.move(-40);  // Stop intake
-  pros::delay(250);  // Brief pause to stabilize
-  
+void MatchAutonL() {
+  bool collectorExtended = false;
+
+  // ===== Collect First Set Blocks =====
+  intake.move(80);
+  combine.move(-80);
+  drive(28_in, DRIVE_SPEED_SLOW);
+  intake.move(40);
+  combine.move(-40);
+  pros::delay(250);
+
+  // ===== Deploy Collector =====
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
-  pros::delay(800);  // Wait 0.5 seconds for pneumatic action
+  pros::delay(800);
 
-  chassis.pid_turn_set(65.5_deg, TURN_SPEED);
-  chassis.pid_wait();
-  chassis.pid_drive_set(14_in, DRIVE_SPEED_SLOW, true);
-  chassis.pid_wait();
-  hood.move(90);  // Outtake to score
+  // ===== Score First Block =====
+  turn(65.5_deg);
+  drive(14_in, DRIVE_SPEED_SLOW);
+  hood.move(90);
   intake.move(127);
-  combine.move(-127);  // Outtake to score pre-load
-  pros::delay(3000);  // Wait to ensure block is scored
+  combine.move(-127);
+  pros::delay(3000);
   intake.move(0);
-  combine.move(0);  // Stop intake
+  combine.move(0);
 
-  chassis.pid_drive_set(-48_in, DRIVE_SPEED, true);  // Drive to front of matchloader
-  chassis.pid_wait();
-  chassis.pid_turn_set(200_deg, TURN_SPEED);
-  chassis.pid_wait();
+  // ===== Drive to Matchloader =====
+  drive(-48_in);
+  turn(200_deg);
 
-    intake.move(127); 
-  combine.move(-127);  // Outtake to score pre-load
-  chassis.pid_drive_set(17_in, DRIVE_SPEED_MEDIUM, true);  // Drive to collect another block
-  chassis.pid_wait();
-  chassis.pid_drive_set(-3_in, DRIVE_SPEED,true);  // Drive slowly to collect
-  chassis.pid_wait();
-  chassis.pid_drive_set(5_in, DRIVE_SPEED,true);  // Drive slowly to collect
-  chassis.pid_wait();
-  chassis.pid_drive_set(-3_in, DRIVE_SPEED,true);  // Drive slowly to collect
-  chassis.pid_wait();
-    combine.move(0);
-    intake.move(20);
-      hood.move(90);  // Stop hood motor
+  // ===== Collect Second Set Blocks =====
+  intake.move(127);
+  combine.move(-127);
+  drive(17_in, DRIVE_SPEED_MEDIUM);
+  drive(-3_in);
+  drive(5_in);
+  drive(-3_in);
+  combine.move(0);
+  intake.move(20);
+  hood.move(90);
 
-  chassis.pid_wait();
-  chassis.pid_drive_set(-14_in, DRIVE_SPEED, true);
-  chassis.pid_wait();   
-  
+  drive(-14_in);
+
+  // ===== Retract Collector =====
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
   pros::delay(800);
 
-  chassis.pid_turn_set(378_deg, TURN_SPEED);
-  chassis.pid_wait();
-  chassis.pid_drive_set(8.67_in, DRIVE_SPEED_MEDIUM, true);  // Drive to score second block
-  chassis.pid_wait();
+  // ===== Score Second Set Blocks =====
+  turn(378_deg);
+  drive(8.67_in, DRIVE_SPEED_MEDIUM);
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
-  chassis.pid_wait();
   intake.move(127);
   combine.move(-100);
   hood.move(-127);
- pros::delay(3000);  // Wait to ensure block is scored
+  pros::delay(3000);
 }
 
 void SkillsAutonPark() {
@@ -537,44 +530,42 @@ chassis.pid_wait();
 }
 
 void SkillsAuton1() {
-      bool collectorExtended = false;
-  chassis.pid_drive_set(30_in, DRIVE_SPEED_MEDIUM, true);  // Drive to score second block
-  chassis.pid_wait();
- collectorExtended = true;
+  bool collectorExtended = false;
+
+  // ===== Initial Drive & Collector Deploy =====
+  drive(30_in, DRIVE_SPEED_MEDIUM);
+  collectorExtended = true;
   block_collector.set_value(collectorExtended);
-  pros::delay(500);  // Wait 0.5 seconds for pneumatic action
-      combine.move(-40);  // Start intake to collect blocks
-      intake.move(100);
-  chassis.pid_turn_set(-90_deg, TURN_SPEED);
-  chassis.pid_wait();
-  chassis.pid_drive_set(12_in, DRIVE_SPEED_MEDIUM, true);
-  chassis.pid_wait(); // Wait to ensure block is secured
-  chassis.pid_drive_set(-3_in, DRIVE_SPEED,true);  // Drive slowly to collect
-  chassis.pid_wait();
-  chassis.pid_drive_set(4_in, DRIVE_SPEED,true);  // Drive slowly to collect
-  chassis.pid_wait();
-  chassis.pid_drive_set(-3_in, DRIVE_SPEED,true);  // Drive slowly to collect
-  chassis.pid_wait();
-   chassis.pid_drive_set(4_in, DRIVE_SPEED,true);  // Drive slowly to collect
-  chassis.pid_wait();
-  chassis.pid_drive_set(-3_in, DRIVE_SPEED,true);  // Drive slowly to collect
-  chassis.pid_wait();
-  chassis.pid_drive_set(4_in, DRIVE_SPEED,true);  // Drive slowly to collect
-  chassis.pid_wait();
+  pros::delay(500);
 
-    pros::delay(600);  // Brief pause to stabilize
-  pros::delay(1500);  // Brief pause to stabilize
-  combine.move(0);  // Stop intake
- 
-  chassis.pid_drive_set(-12_in, DRIVE_SPEED, true);
-  chassis.pid_wait();
+  // ===== Collect Blocks =====
+  combine.move(-40);
+  intake.move(100);
+  turn(-90_deg);
+  drive(12_in, DRIVE_SPEED_MEDIUM);
 
-   collectorExtended = false;
+  // Wiggle forward/back to secure blocks
+  drive(-3_in);
+  drive(4_in);
+  drive(-3_in);
+  drive(4_in);
+  drive(-3_in);
+  drive(4_in);
+
+  pros::delay(600);
+  pros::delay(1500); // Stabilize before moving back
+  combine.move(0);
+
+  // ===== Back Up =====
+  drive(-12_in);
+
+  // ===== Retract Collector =====
+  collectorExtended = false;
   block_collector.set_value(collectorExtended);
   pros::delay(800);
 
-  chassis.pid_turn_set(360_deg, TURN_SPEED);
-  chassis.pid_wait();
+  // ===== Turn Toward Next Objective =====
+  turn(360_deg);
 }
 
   void Autonomous() {
