@@ -74,7 +74,6 @@ void initialize() {
     Auton("Match Auton Left", MatchAutonL),
     Auton("Skills Auton Park", SkillsAutonPark)
   });
-  ez::as::auton_selector.print_autons();
 
 }
 
