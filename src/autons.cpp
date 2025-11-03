@@ -11,7 +11,7 @@ const int TURN_SPEED = 90;
 const int TURN_SPEED_SLOW = 60;
 const int SWING_SPEED = 110;
 //Drive speeds
-const int DRIVE_SPEED = 100;
+const int DRIVE_SPEED = 110;
 const int DRIVE_SPEED_SLOW = 40;
 const int DRIVE_SPEED_MEDIUM = 65;
 
@@ -504,7 +504,7 @@ void MatchAutonL() {
   hood.move(90);
 
   drive(-14_in);
-
+  pros::delay(2500);
   // ===== Retract Collector =====
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
