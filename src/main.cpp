@@ -70,9 +70,10 @@ void initialize() {
     Auton("Drive Example", drive_example),
     Auton("Turn Example", turn_example),
     Auton("Swing Example", swing_example),
-    Auton("Match Auton Right", MatchAutonR),
-    Auton("Match Auton Left", MatchAutonL),
-    Auton("Skills Auton Park", SkillsAutonPark)
+    Auton("Match Auto Right", MatchAutonR),
+    Auton("Match Auto Left", MatchAutonL),
+    Auton("Skills Auto Park", SkillsAutonPark),
+    Auton("Skills Auto 1", SkillsAuton1)
   });
 
 }
@@ -236,7 +237,7 @@ void ez_template_extras() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-  // Motors
+  // motors
   pros::Controller master (CONTROLLER_MASTER);
   pros::Motor combine_motor (COMBINE_MOTOR_PORT);
   pros::Motor hood_motor (HOOD_MOTOR_PORT);
@@ -245,13 +246,12 @@ void opcontrol() {
   pros::adi::Pneumatics block_collector('A', false); // Pneumatic for the block collector
   
   // booleans
-  bool toggle = false;
-	bool latch = false;
-  bool Xwas_pressed = false;
-  bool X_Motor_Slow = false;
-  int x= 150;
-  int y= -150;
-
+    bool toggle = false;
+	  bool latch = false;
+    bool Xwas_pressed = false;
+    bool X_Motor_Slow = false;
+   int x= 150;
+   int y= -150;
 
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
