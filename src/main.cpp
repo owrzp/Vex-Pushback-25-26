@@ -73,7 +73,8 @@ void initialize() {
     Auton("Match Auto Right", MatchAutonR),
     Auton("Match Auto Left", MatchAutonL),
     Auton("Skills Auto Park", SkillsAutonPark),
-    Auton("Skills Auto 1", SkillsAuton1)
+    Auton("Skills Auto 1", SkillsAuton1),
+    Auton("Math Auto R2", MatchAutonR2)
   });
 
 }

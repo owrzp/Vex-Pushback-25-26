@@ -1,5 +1,4 @@
 #pragma once
-void drive();
 void default_constants();
 void drive_example();
 void turn_example();
@@ -19,3 +18,12 @@ void MatchAutonR();
 void MatchAutonL();
 void SkillsAutonPark();
 void SkillsAuton1();
+void MatchAutonR2();
+
+//Helper Functions
+void swingAbsLeft();
+void swingAbsRight();
+void drive();
+void turn();
+void arcRightAbs();
+

@@ -1,5 +1,5 @@
 #include "main.h"
-using namespace okapi;
+using namespace okapi;   
 
 /////
 // For installation, upgrading, documentations, and tutorials, check out our website!
@@ -390,6 +390,22 @@ void turn(okapi::QAngle angle, int speed = TURN_SPEED) {
   chassis.pid_wait();
 }
 
+// Absolute swing
+void swingAbsLeft(double deg, int speed = 90) {
+  chassis.pid_swing_set(ez::LEFT_SWING, deg * 1_deg, speed);
+  chassis.pid_wait();
+}
+
+void swingAbsRight(double deg, int speed = 90) {
+  chassis.pid_swing_set(ez::RIGHT_SWING, deg * 1_deg, speed);
+  chassis.pid_wait();
+}
+
+void arcRightAbs(double deg, int turnSpeed = 90, int insideSpeed = 30) {
+  chassis.pid_swing_set(ez::RIGHT_SWING, deg * 1_deg, turnSpeed, insideSpeed);
+  chassis.pid_wait();
+}
+
  // . . .
 // Make your own autonomous functions here!
 // . . .
@@ -451,6 +467,26 @@ void MatchAutonR() {
   pros::delay(3000);
 }
  
+void MatchAutonR2() {
+  bool collectorExtended = false;
+  chassis.slew_swing_set(true);  // Enables global slew
+
+    // ===== Path to First Blocks =====
+drive(6_in);              
+arcRightAbs(90, 90, 40);  
+drive(6_in);              
+
+  // ===== Deploy Collector =====
+
+  // ===== Score First Block =====
+ 
+ 
+  // ===== Drive to Matchloader =====
+  
+
+  // ===== Collect Second Set Blocks =====
+ 
+}
  // // Extend the block collector
   // collectorExtended = true;
   // block_collector.set_value(collectorExtended);
