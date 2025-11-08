@@ -390,7 +390,6 @@ void turn(okapi::QAngle angle, int speed = TURN_SPEED) {
   chassis.pid_wait();
 }
 
-// Absolute swing
 void swingAbsLeft(double deg, int speed = 90) {
   chassis.pid_swing_set(ez::LEFT_SWING, deg * 1_deg, speed);
   chassis.pid_wait();
@@ -403,6 +402,11 @@ void swingAbsRight(double deg, int speed = 90) {
 
 void arcRightAbs(double deg, int turnSpeed = 90, int insideSpeed = 30) {
   chassis.pid_swing_set(ez::RIGHT_SWING, deg * 1_deg, turnSpeed, insideSpeed);
+  chassis.pid_wait();
+}
+
+void arcLeftAbs(double deg, int turnSpeed = 90, int insideSpeed = 30) {
+  chassis.pid_swing_set(ez::LEFT_SWING, deg * 1_deg, turnSpeed, insideSpeed);
   chassis.pid_wait();
 }
 
