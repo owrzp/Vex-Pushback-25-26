@@ -501,7 +501,7 @@ pros::delay(350);
 combine.move(127);
  pros::delay(2000);
   // ===== Drive to Matchloader =====
-  drive(-50.5_in);
+  drive(-51_in);
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
   pros::delay(400);
@@ -509,13 +509,26 @@ combine.move(127);
   // ===== Collect Second Set Blocks =====
  intake.move(127);
  combine.move(-127);
-  drive(14_in, DRIVE_SPEED_MEDIUM);
-  drive(-3_in);
-  drive(3_in);
-  drive(-3_in);
-  combine.move(-30);
+  drive(15_in, DRIVE_SPEED_MEDIUM);
+  drive(-2_in);
+  drive(2_in);
+  drive(-2_in);
+  combine.move(-20);
   intake.move(60);
   drive(-14_in);
+  turn(360_deg);
+  // ===== Retract Collector =====
+  collectorExtended = false;
+  block_collector.set_value(collectorExtended);
+  pros::delay(800);
+  // ===== Score Second Set Blocks =====
+  drive(9_in);
+  chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
+
+  intake.move(127);
+  combine.move(-127);
+  hood.move(-127);
+  pros::delay(3000);
 
 }
 
