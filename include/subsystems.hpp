@@ -10,6 +10,7 @@ extern Drive chassis;
 // inline pros::Motor intake(1);
 // inline pros::adi::DigitalIn limit_switch('A');
     inline pros::Motor intake(6);
-    inline pros::Motor hood(3);
     inline pros::Motor combine(4);
+    inline pros::Motor hood(3);
     inline pros::adi::Pneumatics block_collector('A', false); // Pneumatic for the block collector
+    inline pros::adi::Pneumatics descore_mech('B', false); // Pneumatic for the mobile goal lift

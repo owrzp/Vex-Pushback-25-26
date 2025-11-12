@@ -74,7 +74,7 @@ void initialize() {
     Auton("Match Auto Left", MatchAutonL),
     Auton("Skills Auto Park", SkillsAutonPark),
     Auton("Skills Auto 1", SkillsAuton1),
-    Auton("Math Auto R2", MatchAutonR2)
+    Auton("Match Auto Right2", MatchAutonR2)
   });
 
 }
@@ -130,8 +130,8 @@ void autonomous() {
   You can do cool curved motions, but you have to give your robot the best chance
   to be consistent
   */
-  // MatchAutonR();
-  ez::as::auton_selector.selected_auton_call();// Calls selected auton from autonomous selector
+  MatchAutonR2();
+  // ez::as::auton_selector.selected_auton_call();// Calls selected auton from autonomous selector
 }
 
 /**
@@ -207,7 +207,7 @@ void ez_template_extras() {
       chassis.pid_tuner_toggle();
 
     // Trigger the selected autonomous routine
-    if (master.get_digital(DIGITAL_A) && master.get_digital(DIGITAL_UP)) {
+    if (master.get_digital(DIGITAL_A) && master.get_digital(DIGITAL_LEFT)) {
       pros::motor_brake_mode_e_t preference = chassis.drive_brake_get();
       autonomous();
       chassis.drive_brake_set(preference);
@@ -249,6 +249,8 @@ void opcontrol() {
   // booleans
     bool toggle = false;
 	  bool latch = false;
+    bool latch2 = false;
+    bool toggle2 = false;
     bool Xwas_pressed = false;
     bool X_Motor_Slow = false;
    int x= 150;
@@ -335,6 +337,25 @@ void opcontrol() {
       }
     } else {
       latch = false; 
+    }
+
+    //Pneumatic control
+    bool up_button = master.get_digital(DIGITAL_UP);
+	
+	  if (toggle2){
+      descore_mech.set_value(true); 
+    }
+    else {
+      descore_mech.set_value(false); 
+    }
+
+    if (up_button) {
+      if(!latch2){ 
+        toggle2 = !toggle2;
+        latch2 = true;
+      }
+    } else {
+      latch2 = false; 
     }
    
    

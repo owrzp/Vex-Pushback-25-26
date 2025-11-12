@@ -410,9 +410,20 @@ void arcLeftAbs(double deg, int turnSpeed = 90, int insideSpeed = 30) {
   chassis.pid_wait();
 }
 
+// // Extend the block collector
+  // collectorExtended = true;
+  // block_collector.set_value(collectorExtended);
+  // pros::delay(500);  // Wait 0.5 seconds for pneumatic action
+
+  // // Retract the block collector
+  // collectorExtended = false;
+  // block_collector.set_value(collectorExtended);
+  // pros::delay(300);
+
  // . . .
 // Make your own autonomous functions here!
 // . . .
+
 void MatchAutonR() {
   bool collectorExtended = false;
 
@@ -474,34 +485,39 @@ void MatchAutonR() {
 void MatchAutonR2() {
   bool collectorExtended = false;
   chassis.slew_swing_set(true);  // Enables global slew
+  chassis.imu.tare_rotation();
 
-    // ===== Path to First Blocks =====
-drive(6_in);              
-arcRightAbs(90, 90, 40);  
-drive(6_in);              
-
-  // ===== Deploy Collector =====
-
+ // ===== Path to First Blocks =====
+  intake.move(100);
+  combine.move(-60);
+drive(9_in);              
+turn(30_deg);
+drive(16_in, DRIVE_SPEED_SLOW);
+pros::delay(350);
   // ===== Score First Block =====
- 
- 
+ turn(-45_deg);
+ drive(16_in, DRIVE_SPEED);
+ intake.move(-127);
+combine.move(127);
+ pros::delay(2000);
   // ===== Drive to Matchloader =====
-  
-
+  drive(-50.5_in);
+  collectorExtended = true;
+  block_collector.set_value(collectorExtended);
+  pros::delay(400);
+  turn(-180_deg);
   // ===== Collect Second Set Blocks =====
- 
+ intake.move(127);
+ combine.move(-127);
+  drive(14_in, DRIVE_SPEED_MEDIUM);
+  drive(-3_in);
+  drive(3_in);
+  drive(-3_in);
+  combine.move(-30);
+  intake.move(60);
+  drive(-14_in);
+
 }
- // // Extend the block collector
-  // collectorExtended = true;
-  // block_collector.set_value(collectorExtended);
-  // pros::delay(500);  // Wait 0.5 seconds for pneumatic action
-
-  // // Retract the block collector
-  // collectorExtended = false;
-  // block_collector.set_value(collectorExtended);
-  // pros::delay(300);
-
-
 
 void MatchAutonL() {
   bool collectorExtended = false;
