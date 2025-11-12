@@ -492,7 +492,7 @@ void MatchAutonR2() {
   combine.move(-60);
 drive(9_in);              
 turn(30_deg);
-drive(16_in, DRIVE_SPEED_SLOW);
+drive(17_in, DRIVE_SPEED_SLOW);
 pros::delay(350);
   // ===== Score First Block =====
  turn(-45_deg);
@@ -516,7 +516,7 @@ combine.move(127);
   combine.move(-20);
   intake.move(60);
   drive(-14_in);
-  turn(360_deg);
+  turn(370_deg);
   // ===== Retract Collector =====
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
@@ -550,7 +550,7 @@ void MatchAutonL() {
 
   // ===== Score First Block =====
   turn(65.5_deg);
-  drive(14_in, DRIVE_SPEED_SLOW);
+  drive(14_in, DRIVE_SPEED_MEDIUM);
   hood.move(90);
   intake.move(127);
   combine.move(-127);
@@ -581,8 +581,8 @@ void MatchAutonL() {
   pros::delay(800);
 
   // ===== Score Second Set Blocks =====
-  turn(378_deg);
-  drive(8.67_in, DRIVE_SPEED_MEDIUM);
+  turn(360_deg);
+  drive(8.67_in, DRIVE_SPEED);
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
   intake.move(127);
   combine.move(-100);
