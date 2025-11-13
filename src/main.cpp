@@ -323,7 +323,7 @@ void opcontrol() {
     }
 
     //Pneumatic control for matchloader
-    bool b_button = master.get_digital(DIGITAL_B);
+    bool b_button = master.get_digital(DIGITAL_X);
 	
 	  if (toggle){
       block_collector.set_value(true); 
