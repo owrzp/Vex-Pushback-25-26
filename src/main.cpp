@@ -130,7 +130,7 @@ void autonomous() {
   You can do cool curved motions, but you have to give your robot the best chance
   to be consistent
   */
-  MatchAutonR2();
+  MatchAutonL2();
   // ez::as::auton_selector.selected_auton_call();// Calls selected auton from autonomous selector
 }
 
@@ -289,6 +289,8 @@ void opcontrol() {
 
     if (Xis_pressed && !Xwas_pressed) {
         X_Motor_Slow = !X_Motor_Slow; 
+
+    
     }
 //maybe switch is and was to get different results
     Xwas_pressed = Xis_pressed;
@@ -320,7 +322,7 @@ void opcontrol() {
       intake_motor.move_velocity(0);
     }
 
-    //Pneumatic control
+    //Pneumatic control for matchloader
     bool b_button = master.get_digital(DIGITAL_B);
 	
 	  if (toggle){
@@ -339,7 +341,7 @@ void opcontrol() {
       latch = false; 
     }
 
-    //Pneumatic control
+    //Pneumatic control for descore_mech
     bool up_button = master.get_digital(DIGITAL_UP);
 	
 	  if (toggle2){
@@ -358,8 +360,6 @@ void opcontrol() {
       latch2 = false; 
     }
    
-   
-  
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }

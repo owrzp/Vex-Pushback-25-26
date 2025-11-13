@@ -20,7 +20,7 @@ const int DRIVE_SPEED_MEDIUM = 65;
 ///
 void default_constants() {
   // P, I, D, and Start I
-  chassis.pid_drive_constants_set(20.0, 0.0, 90.0);         // Fwd/rev constants, used for odom and non odom motions
+  chassis.pid_drive_constants_set(20.0, 0.001, 90.0);         // Fwd/rev constants, used for odom and non odom motions
   chassis.pid_heading_constants_set(11.0, 0.0, 20.0);        // Holds the robot straight while going forward without odom
   chassis.pid_turn_constants_set(3.0, 0.05, 20.0, 15.0);     // Turn in place constants
   chassis.pid_swing_constants_set(6.0, 0.0, 65.0);           // Swing constants
@@ -501,7 +501,7 @@ pros::delay(350);
 combine.move(127);
  pros::delay(2000);
   // ===== Drive to Matchloader =====
-  drive(-51_in);
+  drive(-52_in);
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
   pros::delay(400);
@@ -516,7 +516,7 @@ combine.move(127);
   combine.move(-20);
   intake.move(60);
   drive(-14_in);
-  turn(370_deg);
+  turn(360_deg);
   // ===== Retract Collector =====
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
@@ -590,6 +590,58 @@ void MatchAutonL() {
   pros::delay(3000);
 }
 
+void MatchAutonL2() {
+   bool collectorExtended = false;
+  chassis.slew_swing_set(true);  // Enables global slew
+  chassis.imu.tare_rotation();
+
+ // ===== Path to First Blocks =====
+  intake.move(100);
+  combine.move(-60);
+drive(9_in);              
+turn(-30_deg);
+drive(14_in, DRIVE_SPEED);
+pros::delay(350);
+  // ===== Score First Block =====
+ turn(45_deg);
+ collectorExtended = true;
+block_collector.set_value(collectorExtended);
+ drive(16_in, DRIVE_SPEED);
+ intake.move(-127);
+combine.move(-127);
+hood.move(90);
+ pros::delay(2000);
+  // ===== Drive to Matchloader =====
+  drive(-51_in);
+  collectorExtended = true;
+  block_collector.set_value(collectorExtended);
+  pros::delay(400);
+  turn(-180_deg);
+  // ===== Collect Second Set Blocks =====
+ intake.move(127);
+ combine.move(-127);
+  drive(15_in, DRIVE_SPEED_MEDIUM);
+  drive(-2_in);
+  drive(2_in);
+  drive(-2_in);
+  combine.move(-20);
+  intake.move(60);
+  drive(-14_in);
+  turn(370_deg);
+  // ===== Retract Collector =====
+  collectorExtended = false;
+  block_collector.set_value(collectorExtended);
+  pros::delay(800);
+  // ===== Score Second Set Blocks =====
+  drive(9_in);
+  chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
+
+  intake.move(127);
+  combine.move(-127);
+  hood.move(-127);
+  pros::delay(3000);
+}
+
 void SkillsAutonPark() {
 chassis.pid_drive_set(-10_in, 120, true);
 chassis.pid_wait();
@@ -645,7 +697,7 @@ void SkillsAuton1() {
   chassis.odom_xyt_set(0_in, 0_in, 0_deg);    // Set the current position, you can start at a specific position with this
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);  // Set motors to hold.  This helps autonomous consistency
 
-    MatchAutonR(); // directly call your function
+    MatchAutonR2(); // directly call your function
 
   /*
   Odometry and Pure Pursuit are not magic
