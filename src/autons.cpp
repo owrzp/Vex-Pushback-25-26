@@ -596,17 +596,17 @@ void MatchAutonL2() {
   chassis.imu.tare_rotation();
 
  // ===== Path to First Blocks =====
-  intake.move(100);
+  intake.move(127);
   combine.move(-60);
 drive(9_in);              
 turn(-30_deg);
-drive(14_in, DRIVE_SPEED);
-pros::delay(350);
+drive(17_in, DRIVE_SPEED_MEDIUM);
+pros::delay(300);
   // ===== Score First Block =====
  turn(45_deg);
  collectorExtended = true;
 block_collector.set_value(collectorExtended);
- drive(16_in, DRIVE_SPEED);
+ drive(15.5_in, DRIVE_SPEED);
  intake.move(-127);
 combine.move(-127);
 hood.move(90);
@@ -627,13 +627,13 @@ hood.move(90);
   combine.move(-20);
   intake.move(60);
   drive(-14_in);
-  turn(370_deg);
+  turn(360_deg);
   // ===== Retract Collector =====
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
   pros::delay(800);
   // ===== Score Second Set Blocks =====
-  drive(9_in);
+  drive(9.5_in);
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
 
   intake.move(127);
@@ -652,6 +652,8 @@ chassis.pid_wait();
 }
 
 void SkillsAuton1() {
+  chassis.drive_angle_set(90_deg);
+
   bool collectorExtended = false;
 
   // ===== Initial Drive & Collector Deploy =====
@@ -663,31 +665,30 @@ void SkillsAuton1() {
   // ===== Collect Blocks =====
   combine.move(-40);
   intake.move(100);
-  turn(-90_deg);
-  drive(12_in, DRIVE_SPEED_MEDIUM);
+  turn(180_deg);
+  drive(12.5_in, DRIVE_SPEED);
 
   // Wiggle forward/back to secure blocks
   drive(-3_in);
   drive(4_in);
   drive(-3_in);
   drive(4_in);
-  drive(-3_in);
-  drive(4_in);
 
-  pros::delay(600);
-  pros::delay(1500); // Stabilize before moving back
+  pros::delay(800);
   combine.move(0);
 
   // ===== Back Up =====
   drive(-12_in);
-
-  // ===== Retract Collector =====
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
   pros::delay(800);
-
-  // ===== Turn Toward Next Objective =====
   turn(360_deg);
+  drive(13.5_in);
+  intake.move(127);
+  combine.move(-127);
+  hood.move(-127);
+  pros::delay(4000);
+
 }
 
   void Autonomous() {

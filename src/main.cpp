@@ -130,7 +130,7 @@ void autonomous() {
   You can do cool curved motions, but you have to give your robot the best chance
   to be consistent
   */
-  MatchAutonL2();
+  SkillsAuton1();
   // ez::as::auton_selector.selected_auton_call();// Calls selected auton from autonomous selector
 }
 
@@ -323,7 +323,7 @@ void opcontrol() {
     }
 
     //Pneumatic control for matchloader
-    bool b_button = master.get_digital(DIGITAL_X);
+    bool b_button = master.get_digital(DIGITAL_B);
 	
 	  if (toggle){
       block_collector.set_value(true); 
