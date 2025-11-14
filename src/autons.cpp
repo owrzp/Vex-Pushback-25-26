@@ -483,53 +483,71 @@ void MatchAutonR() {
 }
  
 void MatchAutonR2() {
-  bool collectorExtended = false;
-  chassis.slew_swing_set(true);  // Enables global slew
+ bool collectorExtended = false;
+
+  // Disable slew for faster accel & turns
+  chassis.slew_drive_set(false);
+  chassis.slew_swing_set(false);
+
   chassis.imu.tare_rotation();
 
- // ===== Path to First Blocks =====
+  // ===== Path to First Blocks =====
   intake.move(100);
   combine.move(-60);
-drive(9_in);              
-turn(30_deg);
-drive(17_in, DRIVE_SPEED_SLOW);
-pros::delay(350);
+
+  drive(9_in, 127);
+  turn(30_deg, 127);
+  drive(17_in, 127);
+  pros::delay(200);
+
   // ===== Score First Block =====
- turn(-45_deg);
- drive(16_in, DRIVE_SPEED);
- intake.move(-127);
-combine.move(127);
- pros::delay(2000);
+  turn(-45_deg, 127);
+  drive(16_in, 127);
+
+  intake.move(-127);
+  combine.move(127);
+  pros::delay(900);   // was 2000
+
   // ===== Drive to Matchloader =====
-  drive(-52_in);
+  drive(-52_in, 127);
+
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
-  pros::delay(400);
-  turn(-180_deg);
+  pros::delay(300);   // was 400
+
+  turn(-180_deg, 127);
+
   // ===== Collect Second Set Blocks =====
- intake.move(127);
- combine.move(-127);
-  drive(15_in, DRIVE_SPEED_MEDIUM);
-  drive(-2_in);
-  drive(2_in);
-  drive(-2_in);
+  intake.move(127);
+  combine.move(-127);
+
+  drive(15_in, 127);
+
+  // ===== Matchloader Jiggles (kept, but 4× faster) =====
+  drive(-2_in, 127);
+  drive(2_in, 127);
+  drive(-2_in, 127);
+  drive(2_in, 127);
+
   combine.move(-20);
   intake.move(60);
-  drive(-14_in);
-  turn(360_deg);
+
+  drive(-14_in, 127);
+  turn(360_deg, 127);
+
   // ===== Retract Collector =====
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
-  pros::delay(800);
+  pros::delay(300);   // was 800
+
   // ===== Score Second Set Blocks =====
-  drive(9_in);
+  drive(9_in, 127);
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
 
   intake.move(127);
   combine.move(-127);
   hood.move(-127);
-  pros::delay(3000);
-
+  pros::delay(1200);  // was 3000
 }
 
 void MatchAutonL() {
