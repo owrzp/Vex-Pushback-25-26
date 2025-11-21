@@ -74,7 +74,10 @@ void initialize() {
     Auton("Match Auto Left", MatchAutonL),
     Auton("Skills Auto Park", SkillsAutonPark),
     Auton("Skills Auto 1", SkillsAuton1),
-    Auton("Match Auto Right2", MatchAutonR2)
+    Auton("Skills Auto 2", SkillsAuton2),
+    Auton("Match Auto Right2", MatchAutonR2),
+    Auton("Match Auto Left2", MatchAutonL2),
+
   });
 
 }
@@ -130,7 +133,7 @@ void autonomous() {
   You can do cool curved motions, but you have to give your robot the best chance
   to be consistent
   */
-  SkillsAuton1();
+  SkillsAuton2();
   // ez::as::auton_selector.selected_auton_call();// Calls selected auton from autonomous selector
 }
 
