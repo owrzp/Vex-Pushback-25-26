@@ -772,7 +772,6 @@ void SkillsAuton1() {
 
 void SkillsAuton2() {
   chassis.drive_angle_set(90_deg);
-
   bool collectorExtended = false;
 
   // ===== Initial Drive & Collector Deploy =====
@@ -813,7 +812,7 @@ void SkillsAuton2() {
   drive(-12_in); 
   turn(360_deg);
   drive(75_in, DRIVE_SPEED);
-  turn(90_deg);
+  turn(-90_deg);
   drive(12_in);
   turn(180_deg);
   drive(12.5_in);
@@ -832,7 +831,7 @@ void SkillsAuton2() {
   turn(360_deg);         
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
-  drive(13.5_in);
+  drive(13.5_in, 60);
 
   // Wiggle
   drive(-4_in);
@@ -864,7 +863,7 @@ void SkillsAuton2() {
   // Matchload Right Side
   combine.move(-70);
   intake.move(127);
-  drive(13.5_in);
+  drive(13.5_in, 60);
   // Wiggle
   drive(-4_in);
   drive(4.25_in);
@@ -874,13 +873,14 @@ void SkillsAuton2() {
   combine.move(-10);
   intake.move(10);
 
+  // ===== Move to front Right Side =====
+  drive(-12.25_in);
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
   pros::delay(450);
-  // ===== Move to front Right Side =====
-  drive(-12.25_in);
   turn(-90_deg);
   drive(25_in);
+  drive(-12_in);
   turn(180_deg);
   drive(76_in, DRIVE_SPEED);
   turn(90_deg);
@@ -931,8 +931,7 @@ void SkillsAuton2() {
   combine.move(-127);
   drive(61_in, DRIVE_SPEED);
   pros::delay(4000);
-
-
+  
 }
 
   void Autonomous() {
