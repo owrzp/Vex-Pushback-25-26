@@ -20,6 +20,7 @@ void MatchAutonR();
 void MatchAutonL();
 void SkillsAutonPark();
 void SkillsAuton1();
+void SkillsAuton2();
 void MatchAutonR2();
 void MatchAutonL2();
 //Helper Functions
