@@ -745,7 +745,7 @@ void SkillsAuton1() {
   intake.move(127);
   combine.move(-127);
   pros::delay(4000);
-  //=====Park Robot=====
+  //=====Collect Blocks=====
   drive(-10_in);
   turn(-270_deg);
   collectorExtended = true;
@@ -754,21 +754,36 @@ void SkillsAuton1() {
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
   turn(360_deg);
-  drive(10_in);
+  drive(14_in, 60);
   intake.move(127);
   combine.move(-127);
   hood.move(0);
   pros::delay(400);
-  drive(-10_in);
+  intake.move(0);
+  combine.move(0);
+  drive(-14_in);
   turn(-270_deg);
-  drive(12_in);
+  drive(25_in);
   turn(360_deg);
-  drive(9_in);
+  drive(7.5_in);
   hood.move(-127);
   intake.move(127);
   combine.move(-127);
   pros::delay(4000);
+   // =====Park Robot=====
+  drive(-10_in);
+  turn(240_deg);
+  drive(35_in);
+  turn(270_deg);
+  drive(12_in);
+  // Final Forward then Drive to Park
+  hood.move(-127);
+  intake.move(127);
+  combine.move(-127);
+  drive(61_in, DRIVE_SPEED);
+  pros::delay(4000);
 }
+
 
 void SkillsAuton2() {
   chassis.drive_angle_set(90_deg);
@@ -797,23 +812,21 @@ void SkillsAuton2() {
   intake.move(25);
 
   // Back Up
-  drive(-13_in);
+  drive(-20_in);
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
   pros::delay(800);
 
-  turn(360_deg);
+  turn(425_deg);
   intake.move(5);
   combine.move(0);
 
   // =====Move to Next Goal=====
-  turn(90_deg);
-  drive(25_in);
-  drive(-12_in); 
+  drive(20_in);
   turn(360_deg);
-  drive(75_in, DRIVE_SPEED);
+  drive(89_in, DRIVE_SPEED);
   turn(-90_deg);
-  drive(12_in);
+  drive(19.5_in);
   turn(180_deg);
   drive(12.5_in);
 
@@ -853,7 +866,7 @@ void SkillsAuton2() {
 
   // =====Move to Right Side Long Goal=====
   drive(-12_in);
-  turn(270_deg);
+  turn(-90_deg);
   drive(93.67_in, DRIVE_SPEED);
   turn(360_deg);
  
@@ -878,11 +891,10 @@ void SkillsAuton2() {
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
   pros::delay(450);
-  turn(-90_deg);
-  drive(25_in);
-  drive(-12_in);
+  turn(-65_deg);
+  drive(-20_in);
   turn(180_deg);
-  drive(76_in, DRIVE_SPEED);
+  drive(89_in, DRIVE_SPEED);
   turn(90_deg);
   drive(12_in);
   turn(360_deg);
@@ -931,7 +943,7 @@ void SkillsAuton2() {
   combine.move(-127);
   drive(61_in, DRIVE_SPEED);
   pros::delay(4000);
-  
+
 }
 
   void Autonomous() {
