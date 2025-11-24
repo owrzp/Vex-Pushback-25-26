@@ -16,6 +16,7 @@ void odom_boomerang_injected_pure_pursuit_example();
 void measure_offsets();
 
 //Match/Skills Autonomous Routes
+void MatchAutonAWP();
 void MatchAutonR();
 void MatchAutonL();
 void SkillsAutonPark();
@@ -24,6 +25,7 @@ void SkillsAuton2();
 void MatchAutonR2();
 void MatchAutonL2();
 //Helper Functions
+void wiggle();
 void swingAbsLeft();
 void swingAbsRight();
 void drive();
