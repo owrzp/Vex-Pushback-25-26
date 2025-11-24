@@ -669,11 +669,18 @@ void SkillsAuton1() {
   turn(180_deg);
   drive(12.5_in, 60);
 
-  // Wiggle forward/back to secure blocks
-  drive(-3_in);
-  drive(3.25_in);
-  drive(-3_in);
-  drive(3_in);
+  // Wiggle
+  chassis.pid_drive_set(-3, 127);    
+  pros::delay(150);
+
+  chassis.pid_drive_set(3.25, 127);
+  pros::delay(150);
+
+  chassis.pid_drive_set(-3, 127);
+  pros::delay(150);
+
+  chassis.pid_drive_set(3, 127);
+  pros::delay(150);
 
   pros::delay(800);
   combine.move(-35);
