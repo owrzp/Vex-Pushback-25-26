@@ -433,7 +433,7 @@ void MatchAutonAWP() {
   chassis.drive_angle_set(90_deg);
 
   // ===== Initial Drive & Collector Deploy =====
-  drive(31.25_in, 127);
+  drive(30_in, 127);
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
   pros::delay(100);
@@ -449,7 +449,7 @@ void MatchAutonAWP() {
   pros::delay(50);
 
   chassis.pid_drive_set(3.25, 127);
-  pros::delay(50);
+  pros::delay(100);
   combine.move(-35);
   intake.move(40);
 
@@ -459,7 +459,7 @@ void MatchAutonAWP() {
   block_collector.set_value(collectorExtended);
   pros::delay(800);
   turn(363_deg, 127);
-  drive(13.25_in, 127);
+  drive(12.25_in, 127);
   hood.move(-127);
   intake.move(127);
   combine.move(-127);
@@ -470,16 +470,15 @@ void MatchAutonAWP() {
   turn(-45_deg, 127);
   combine.move(-127);
   intake.move(127);
-  drive(24_in, 127);
-  intake.move(20);
+  drive(40_in, 127);
   combine.move(-30);
   turn(-90_deg,127);
   drive(44_in, 127);
+  drive(4_in, 70);
+  turn(45_deg, 127);
   combine.move(-127);
   intake.move(127);
   hood.move(127);
-  drive(4_in, 70);
-  turn(45_deg, 127);
   block_collector.set_value(true);
   block_collector.set_value(collectorExtended);
   drive(15.5_in, 127);
@@ -488,8 +487,6 @@ void MatchAutonAWP() {
   combine.move(0);
 // ===== Collect and Score Upper Left Blocks =====
   drive(-51_in, 127);
-  collectorExtended = true;
-  block_collector.set_value(collectorExtended);
   turn(-180_deg, 127);
   // ===== Collect Second Set Blocks =====
   intake.move(127);
@@ -517,11 +514,6 @@ void MatchAutonAWP() {
   combine.move(-127);
   hood.move(-127);
   pros::delay(3000);
-
-
-
-
-
 }
 
 void MatchAutonR() {
