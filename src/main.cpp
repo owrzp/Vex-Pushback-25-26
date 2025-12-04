@@ -67,17 +67,15 @@ void initialize() {
   master.rumble(chassis.drive_imu_calibrated() ? "." : "---");
 
   ez::as::auton_selector.autons_add({
+    Auton("Skills Auton Park", SkillsAutonPark),
+    Auton("Skills Auton 1", SkillsAuton1),
+    Auton("Skills Auton 2", SkillsAuton2),
     Auton("Drive Example", drive_example),
     Auton("Turn Example", turn_example),
     Auton("Swing Example", swing_example),
-    Auton("Match Auto Right", MatchAutonR),
-    Auton("Match Auto Left", MatchAutonL),
-    Auton("Skills Auto Park", SkillsAutonPark),
-    Auton("Skills Auto 1", SkillsAuton1),
-    Auton("Skills Auto 2", SkillsAuton2),
     Auton("Match Auto AWP", MatchAutonAWP),
-    Auton("Match Auto Right2", MatchAutonR2),
-    Auton("Match Auto Left2", MatchAutonL2),
+    Auton("Match Auto Right", MatchAutonR2),
+    Auton("Match Auto Left", MatchAutonL2),
 
   });
 
@@ -134,7 +132,7 @@ void autonomous() {
   You can do cool curved motions, but you have to give your robot the best chance
   to be consistent
   */
-  MatchAutonAWP();
+  SkillsAuton1();
   // ez::as::auton_selector.selected_auton_call();// Calls selected auton from autonomous selector
 }
 
@@ -326,7 +324,7 @@ void opcontrol() {
       intake_motor.move_velocity(0);
     }
 
-    //Pneumatic control for matchloader
+    //pneumatic control for matchloader
     bool b_button = master.get_digital(DIGITAL_B);
 	
 	  if (toggle){

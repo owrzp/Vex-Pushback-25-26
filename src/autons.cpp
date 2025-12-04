@@ -379,8 +379,12 @@ void measure_offsets() {
   if (chassis.odom_tracker_front != nullptr) chassis.odom_tracker_front->distance_to_center_set(f_offset);
 }
 
-//Custom Helper Functions
 
+
+
+
+
+// Custom Helper Functions
 void drive(QLength distance, int speed = DRIVE_SPEED, bool slew = true) {
   chassis.pid_drive_set(distance, speed, slew);
   chassis.pid_wait();
@@ -416,7 +420,7 @@ void arcLeftAbs(double deg, int turnSpeed = 90, int insideSpeed = 30) {
   // block_collector.set_value(collectorExtended);
   // pros::delay(500);  // Wait 0.5 seconds for pneumatic action
 
-  // // Retract the block collector
+// // Retract the block collector
   // collectorExtended = false;
   // block_collector.set_value(collectorExtended);
   // pros::delay(300);
@@ -433,7 +437,7 @@ void MatchAutonAWP() {
   chassis.drive_angle_set(90_deg);
 
   // ===== Initial Drive & Collector Deploy =====
-  drive(30_in, 127);
+  drive(28_in, 127);
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
   pros::delay(100);
@@ -442,13 +446,19 @@ void MatchAutonAWP() {
   combine.move(-127);
   intake.move(127);
   turn(180_deg, 127);
-  drive(12.5_in, 60);
+  drive(11.25_in, 60);
 
   // Wiggle
   chassis.pid_drive_set(-3, 127);    
   pros::delay(50);
 
   chassis.pid_drive_set(3.25, 127);
+
+  chassis.pid_drive_set(-3, 127);    
+  pros::delay(50);
+
+  chassis.pid_drive_set(3.25, 127);
+
   pros::delay(100);
   combine.move(-35);
   intake.move(40);
@@ -550,9 +560,12 @@ void MatchAutonR() {
   intake.move(127);
   combine.move(-127);
   drive(14_in, DRIVE_SPEED_MEDIUM);
-  drive(-3_in);
-  drive(3_in);
-  drive(-3_in);
+  // Wiggle
+  chassis.pid_drive_set(-3, 127);    
+  pros::delay(50);
+
+  chassis.pid_drive_set(3.25, 127);
+  pros::delay(100);
   combine.move(-30);
   intake.move(40);
   drive(-14_in);
@@ -566,7 +579,6 @@ void MatchAutonR() {
   combine.move(0);
   turn(358_deg);
   drive(9_in);
-  chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
 
   intake.move(127);
   combine.move(-127);
@@ -604,9 +616,12 @@ combine.move(127);
  intake.move(127);
  combine.move(-127);
   drive(20_in, 60);
-  drive(-2_in);
-  // drive(2_in);
-  // drive(-2_in);
+    // Wiggle
+  chassis.pid_drive_set(-3, 127);    
+  pros::delay(50);
+
+  chassis.pid_drive_set(3.25, 127);
+  pros::delay(100);
   combine.move(-25);
   intake.move(60);
   drive(-15_in);
@@ -714,9 +729,12 @@ hood.move(90);
  intake.move(127);
  combine.move(-127);
   drive(15_in, DRIVE_SPEED_MEDIUM);
-  drive(-2_in);
-  drive(2_in);
-  drive(-2_in);
+   // Wiggle
+  chassis.pid_drive_set(-3, 127);    
+  pros::delay(50);
+
+  chassis.pid_drive_set(3.25, 127);
+  pros::delay(100);
   combine.move(-20);
   intake.move(60);
   drive(-14_in);
@@ -749,7 +767,7 @@ void SkillsAuton1() {
   bool collectorExtended = false;
 
   // ===== Initial Drive & Collector Deploy =====
-  drive(31.25_in, DRIVE_SPEED);
+  drive(30.5_in, DRIVE_SPEED);
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
   pros::delay(500);
@@ -758,20 +776,25 @@ void SkillsAuton1() {
   combine.move(-70);
   intake.move(100);
   turn(180_deg);
-  drive(12.5_in, 60);
+  drive(16_in, 60);
 
   // Wiggle
   chassis.pid_drive_set(-3, 127);    
-  pros::delay(150);
+  pros::delay(200);
 
   chassis.pid_drive_set(3.25, 127);
-  pros::delay(150);
+  pros::delay(200);
 
   chassis.pid_drive_set(-3, 127);
-  pros::delay(150);
+  pros::delay(200);
 
   chassis.pid_drive_set(3, 127);
-  pros::delay(150);
+  pros::delay(200);
+
+  chassis.pid_drive_set(-3, 127);
+  pros::delay(200);
+
+  chassis.pid_drive_set(3, 127);
   pros::delay(800);
   combine.move(-35);
   intake.move(40);
@@ -781,8 +804,8 @@ void SkillsAuton1() {
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
   pros::delay(800);
-  turn(363_deg);
-  drive(13.25_in);
+  turn(365_deg);
+  drive(12.75_in);
   hood.move(-127);
   intake.move(127);
   combine.move(-127);
@@ -802,28 +825,31 @@ void SkillsAuton1() {
   combine.move(-70);
   intake.move(100);
   turn(180_deg);
-  drive(22_in, 55);
+  drive(34_in, 70);
+  chassis.pid_drive_set(-3, 127);    
+  pros::delay(200);
 
-  // Wiggle
-   chassis.pid_drive_set(-3, 127);    
-  pros::delay(150);
+  chassis.pid_drive_set(4.5, 127);
+  pros::delay(200);
 
-  chassis.pid_drive_set(3.25, 127);
-  pros::delay(150);
-
-  chassis.pid_drive_set(-3.25, 110);
-  pros::delay(150);
-
-  chassis.pid_drive_set(3, 127);
-  
   chassis.pid_drive_set(-3, 127);
-  pros::delay(150);
+  pros::delay(200);
 
-  chassis.pid_drive_set(3, 127);
+  chassis.pid_drive_set(4.5, 127);
 
-  pros::delay(150);
-  combine.move(-40);
-  intake.move(10);
+  chassis.pid_drive_set(-3, 127);    
+  pros::delay(200);
+
+  chassis.pid_drive_set(4.5, 127);
+  pros::delay(200);
+
+  chassis.pid_drive_set(-3, 127);
+  pros::delay(200);
+
+  chassis.pid_drive_set(4.5, 127);
+  pros::delay(800);
+  combine.move(0);
+  intake.move(60);
   hood.move(0);
 
   // ===== Back Up To Score Second Blocks=====
@@ -844,7 +870,7 @@ void SkillsAuton1() {
   intake.move(127);
   combine.move(-127);
   drive(23_in, DRIVE_SPEED);
-  drive(7_in, 30);
+  drive(6.4_in, 30);
   pros::delay(500);
   intake.move(15);
   combine.move(-15);
@@ -877,17 +903,15 @@ void SkillsAuton1() {
   turn(-270_deg);
   drive(25_in);
   turn(360_deg);
-  drive(8.75_in);
+  drive(11_in);
   hood.move(-127);
   intake.move(127);
   combine.move(-127);
   pros::delay(4000);
    // =====Park Robot=====
-  drive(-10_in);
-  turn(240_deg);
-  drive(35_in);
-  turn(270_deg);
-  drive(12_in);
+  drive(-14_in);
+  turn(245_deg);
+  drive(35_in, 127);
   hood.move(-127);
   intake.move(127);
   combine.move(-127);
