@@ -716,11 +716,11 @@ pros::delay(300);
 block_collector.set_value(collectorExtended);
  drive(15.5_in, DRIVE_SPEED);
  intake.move(-127);
-combine.move(-127);
+combine.move(-120);
 hood.move(90);
  pros::delay(2000);
   // ===== Drive to Matchloader =====
-  drive(-51_in);
+  drive(-53_in);
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
   pros::delay(400);
@@ -728,23 +728,23 @@ hood.move(90);
   // ===== Collect Second Set Blocks =====
  intake.move(127);
  combine.move(-127);
-  drive(15_in, DRIVE_SPEED_MEDIUM);
+  drive(14_in, DRIVE_SPEED_MEDIUM);
    // Wiggle
   chassis.pid_drive_set(-3, 127);    
-  pros::delay(50);
+  pros::delay(100);
 
   chassis.pid_drive_set(3.25, 127);
-  pros::delay(100);
+  pros::delay(300);
   combine.move(-20);
   intake.move(60);
   drive(-14_in);
-  turn(360_deg);
+  turn(365_deg);
   // ===== Retract Collector =====
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
   pros::delay(800);
   // ===== Score Second Set Blocks =====
-  drive(9.5_in);
+  drive(11.25_in);
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
 
   intake.move(127);
@@ -767,7 +767,7 @@ void SkillsAuton1() {
   bool collectorExtended = false;
 
   // ===== Initial Drive & Collector Deploy =====
-  drive(30.5_in, DRIVE_SPEED);
+  drive(31_in, DRIVE_SPEED);
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
   pros::delay(500);
@@ -775,28 +775,28 @@ void SkillsAuton1() {
   // ===== Collect Blocks =====
   combine.move(-70);
   intake.move(100);
-  turn(180_deg);
+  turn(184_deg);
   drive(16_in, 60);
 
   // Wiggle
-  chassis.pid_drive_set(-3, 127);    
+  chassis.pid_drive_set(-3, 45);    
   pros::delay(200);
 
-  chassis.pid_drive_set(3.25, 127);
+  chassis.pid_drive_set(3.25, 45);
   pros::delay(200);
 
-  chassis.pid_drive_set(-3, 127);
+  chassis.pid_drive_set(-3, 45);
   pros::delay(200);
 
-  chassis.pid_drive_set(3, 127);
+  chassis.pid_drive_set(3, 45);
   pros::delay(200);
 
-  chassis.pid_drive_set(-3, 127);
+  chassis.pid_drive_set(-3, 45);
   pros::delay(200);
 
-  chassis.pid_drive_set(3, 127);
-  pros::delay(800);
-  combine.move(-35);
+  chassis.pid_drive_set(3, 45);
+  pros::delay(1000);
+  combine.move(-10);
   intake.move(40);
 
   // ===== Back Up To Score First Blocks=====
@@ -811,13 +811,13 @@ void SkillsAuton1() {
   combine.move(-127);
   pros::delay(4250);
   //=====Move to Second Goal=====
-  intake.move(20);
-  combine.move(-50);
+  intake.move(127);
+  combine.move(-20);
   drive(-10.5_in);
-  turn(270_deg);
+  turn(268_deg);
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
-  drive(93.67_in, DRIVE_SPEED);
+  drive(94_in, DRIVE_SPEED);
   turn(180_deg);
 
   //=====Collect Second Goal Blocks=====
@@ -825,7 +825,7 @@ void SkillsAuton1() {
   combine.move(-70);
   intake.move(100);
   turn(180_deg);
-  drive(34_in, 70);
+  drive(35_in, 60);
   chassis.pid_drive_set(-3, 127);    
   pros::delay(200);
 
@@ -835,18 +835,20 @@ void SkillsAuton1() {
   chassis.pid_drive_set(-3, 127);
   pros::delay(200);
 
-  chassis.pid_drive_set(4.5, 127);
-
-  chassis.pid_drive_set(-3, 127);    
-  pros::delay(200);
+  drive(3_in, 70);
 
   chassis.pid_drive_set(4.5, 127);
+
+  chassis.pid_drive_set(-3, 45);    
   pros::delay(200);
 
-  chassis.pid_drive_set(-3, 127);
+  chassis.pid_drive_set(4.5, 45);
   pros::delay(200);
 
-  chassis.pid_drive_set(4.5, 127);
+  chassis.pid_drive_set(-3, 45);
+  pros::delay(200);
+
+  chassis.pid_drive_set(4.5, 45);
   pros::delay(800);
   combine.move(0);
   intake.move(60);
@@ -877,7 +879,7 @@ void SkillsAuton1() {
   hood.move(0);
   drive(-30_in);
   turn(360_deg);
-  drive(13_in);
+  drive(14.5_in);
   hood.move(-127);
   intake.move(127);
   combine.move(-127);
@@ -903,7 +905,7 @@ void SkillsAuton1() {
   turn(-270_deg);
   drive(25_in);
   turn(360_deg);
-  drive(11_in);
+  drive(9.5_in);
   hood.move(-127);
   intake.move(127);
   combine.move(-127);
@@ -911,7 +913,8 @@ void SkillsAuton1() {
    // =====Park Robot=====
   drive(-14_in);
   turn(245_deg);
-  drive(35_in, 127);
+  drive(34_in, 100);
+  turn(-90_deg);
   hood.move(-127);
   intake.move(127);
   combine.move(-127);
