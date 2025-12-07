@@ -1,5 +1,5 @@
 #include "main.h"
-
+pros::Controller master(pros::E_CONTROLLER_MASTER);
 #define COMBINE_MOTOR_PORT 4
 #define HOOD_MOTOR_PORT 3
 #define INTAKE_MOTOR_PORT 6
@@ -132,7 +132,7 @@ void autonomous() {
   You can do cool curved motions, but you have to give your robot the best chance
   to be consistent
   */
-  // SkillsAuton1();
+  // SkillsAuton2();
   ez::as::auton_selector.selected_auton_call();// Calls selected auton from autonomous selector
 }
 

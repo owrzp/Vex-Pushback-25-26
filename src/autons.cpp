@@ -714,13 +714,13 @@ pros::delay(300);
  turn(45_deg);
  collectorExtended = true;
 block_collector.set_value(collectorExtended);
- drive(15.5_in, DRIVE_SPEED);
+ drive(17_in, DRIVE_SPEED);
  intake.move(-127);
-combine.move(-120);
-hood.move(90);
+combine.move(-127);
+hood.move(127);
  pros::delay(2000);
   // ===== Drive to Matchloader =====
-  drive(-53_in);
+  drive(-51_in);
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
   pros::delay(400);
@@ -728,29 +728,29 @@ hood.move(90);
   // ===== Collect Second Set Blocks =====
  intake.move(127);
  combine.move(-127);
-  drive(14_in, DRIVE_SPEED_MEDIUM);
+  drive(15_in, DRIVE_SPEED_MEDIUM);
    // Wiggle
   chassis.pid_drive_set(-3, 127);    
-  pros::delay(100);
+  pros::delay(50);
 
   chassis.pid_drive_set(3.25, 127);
-  pros::delay(300);
+  pros::delay(100);
   combine.move(-20);
   intake.move(60);
   drive(-14_in);
-  turn(365_deg);
+  turn(362_deg);
   // ===== Retract Collector =====
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
   pros::delay(800);
   // ===== Score Second Set Blocks =====
-  drive(11.25_in);
+  drive(11.7_in);
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
 
   intake.move(127);
   combine.move(-127);
   hood.move(-127);
-  pros::delay(3000);
+  pros::delay(4000);
 }
 
 void SkillsAutonPark() {
@@ -811,9 +811,10 @@ void SkillsAuton1() {
   combine.move(-127);
   pros::delay(4250);
   //=====Move to Second Goal=====
-  intake.move(127);
+  intake.move(-127);
   combine.move(-20);
   drive(-10.5_in);
+  intake.move(127);
   turn(268_deg);
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
@@ -867,6 +868,7 @@ void SkillsAuton1() {
   pros::delay(4250);
 
 //=====Collect 4 Left Blocks=====
+  intake.move(-127);
   drive(-12_in);
   turn(45_deg);
   intake.move(127);
@@ -918,7 +920,7 @@ void SkillsAuton1() {
   hood.move(-127);
   intake.move(127);
   combine.move(-127);
-  drive(56_in, 127);
+  drive(40_in, 127);
   pros::delay(4000);
 }
 
@@ -938,15 +940,25 @@ void SkillsAuton2() {
   turn(180_deg);
   drive(12.5_in, 60);
 
-  // Wiggle forward/back to secure blocks
-  drive(-3_in);
-  drive(3.25_in);
-  drive(-3_in);
-  drive(3_in);
-  pros::delay(800);
+   // Wiggle
+  chassis.pid_drive_set(-3, 45);    
+  pros::delay(200);
 
-  combine.move(-40);
-  intake.move(25);
+  chassis.pid_drive_set(3.25, 45);
+  pros::delay(200);
+
+  chassis.pid_drive_set(-3, 45);
+  pros::delay(200);
+
+  chassis.pid_drive_set(3, 45);
+  pros::delay(200);
+
+  chassis.pid_drive_set(-3, 45);
+  pros::delay(200);
+
+  chassis.pid_drive_set(3, 45);
+  pros::delay(1000);
+  intake.move(40);
 
   // Back Up
   drive(-20_in);
@@ -954,16 +966,16 @@ void SkillsAuton2() {
   block_collector.set_value(collectorExtended);
   pros::delay(800);
 
-  turn(425_deg);
+  turn(235_deg);
   intake.move(5);
   combine.move(0);
 
   // =====Move to Next Goal=====
   drive(20_in);
-  turn(360_deg);
-  drive(89_in, DRIVE_SPEED);
+  turn(180_deg);
+  drive(-89_in, DRIVE_SPEED);
   turn(-90_deg);
-  drive(19.5_in);
+  drive(-19.5_in);
   turn(180_deg);
   drive(12.5_in);
 
@@ -984,10 +996,24 @@ void SkillsAuton2() {
   drive(13.5_in, 60);
 
   // Wiggle
-  drive(-4_in);
-  drive(4.25_in);
-  drive(-4_in);
-  drive(4_in);
+  chassis.pid_drive_set(-3, 45);    
+  pros::delay(200);
+
+  chassis.pid_drive_set(3.25, 45);
+  pros::delay(200);
+
+  chassis.pid_drive_set(-3, 45);
+  pros::delay(200);
+
+  chassis.pid_drive_set(3, 45);
+  pros::delay(200);
+
+  chassis.pid_drive_set(-3, 45);
+  pros::delay(200);
+
+  chassis.pid_drive_set(3, 45);
+  pros::delay(1000);
+  intake.move(40);
 
   // score
   drive(-12_in);
@@ -1001,7 +1027,7 @@ void SkillsAuton2() {
   combine.move(-127);
   pros::delay(4250);
 
-  // =====Move to Right Side Long Goal=====
+  // =====Move to Right Side Match Load=====
   drive(-12_in);
   turn(-90_deg);
   drive(93.67_in, DRIVE_SPEED);
@@ -1014,24 +1040,35 @@ void SkillsAuton2() {
   combine.move(-70);
   intake.move(127);
   drive(13.5_in, 60);
-  // Wiggle
-  drive(-4_in);
-  drive(4.25_in);
-  drive(-4_in);
-  drive(4_in);
-  pros::delay(800);
-  combine.move(-10);
-  intake.move(10);
+   // Wiggle
+  chassis.pid_drive_set(-3, 45);    
+  pros::delay(200);
+
+  chassis.pid_drive_set(3.25, 45);
+  pros::delay(200);
+
+  chassis.pid_drive_set(-3, 45);
+  pros::delay(200);
+
+  chassis.pid_drive_set(3, 45);
+  pros::delay(200);
+
+  chassis.pid_drive_set(-3, 45);
+  pros::delay(200);
+
+  chassis.pid_drive_set(3, 45);
+  pros::delay(1000);
+  intake.move(127);
 
   // ===== Move to front Right Side =====
   drive(-12.25_in);
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
   pros::delay(450);
-  turn(-65_deg);
-  drive(-20_in);
+  turn(-55_deg);
+  drive(-25_in);
   turn(180_deg);
-  drive(89_in, DRIVE_SPEED);
+  drive(90_in, DRIVE_SPEED);
   turn(90_deg);
   drive(12_in);
   turn(360_deg);
@@ -1048,11 +1085,25 @@ void SkillsAuton2() {
   block_collector.set_value(collectorExtended);
   drive(13.5_in);
 
-  // Wiggle
-  drive(-4_in);
-  drive(4.25_in);
-  drive(-4_in);
-  drive(4_in);
+    // Wiggle
+  chassis.pid_drive_set(-3, 45);    
+  pros::delay(200);
+
+  chassis.pid_drive_set(3.25, 45);
+  pros::delay(200);
+
+  chassis.pid_drive_set(-3, 45);
+  pros::delay(200);
+
+  chassis.pid_drive_set(3, 45);
+  pros::delay(200);
+
+  chassis.pid_drive_set(-3, 45);
+  pros::delay(200);
+
+  chassis.pid_drive_set(3, 45);
+  pros::delay(1000);
+  intake.move(127);
 
   // Score Front Right Side Blocks
   drive(-12_in);
@@ -1066,19 +1117,20 @@ void SkillsAuton2() {
   pros::delay(4250);
 
   // =====Park Robot=====
-  drive(-10_in);
+  drive(-13_in);
   turn(-45_deg);
-  drive(14_in);
+  drive(25_in);
   turn(360_deg);
   drive(-12_in);
   // =====Final Forward then Drive to Park=====
-  drive(10_in);
-  turn(90_deg);
-  drive(24_in);
+  drive(-14_in);
+  turn(245_deg);
+  drive(34_in, 100);
+  turn(-90_deg);
   hood.move(-127);
   intake.move(127);
   combine.move(-127);
-  drive(61_in, DRIVE_SPEED);
+  drive(56_in, 127);
   pros::delay(4000);
 
 }
