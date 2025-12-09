@@ -276,53 +276,51 @@ void opcontrol() {
     // . . .
 
     
-    // Hood control
-    if (master.get_digital(DIGITAL_L1)) {
-      hood_motor.move_velocity(600);
-    }
-    else if (master.get_digital(DIGITAL_L2)) {
-      hood_motor.move_velocity(-600);
-    } else {
-      hood_motor.move_velocity(0);
-    }
+// Hood control
+if (master.get_digital(DIGITAL_L1)) {
+  hood_motor.move(127);       // was move_velocity(600)
+}
+else if (master.get_digital(DIGITAL_L2)) {
+  hood_motor.move(-127);      // was move_velocity(-600)
+} else {
+  hood_motor.move(0);
+}
 
-    //Combine control
-    bool Xis_pressed = master.get_digital(DIGITAL_X);
+// Combine control
+bool Xis_pressed = master.get_digital(DIGITAL_X);
 
-    if (Xis_pressed && !Xwas_pressed) {
-        X_Motor_Slow = !X_Motor_Slow; 
+if (Xis_pressed && !Xwas_pressed) {
+    X_Motor_Slow = !X_Motor_Slow; 
+}
 
-    
-    }
-//maybe switch is and was to get different results
-    Xwas_pressed = Xis_pressed;
+Xwas_pressed = Xis_pressed;
 
-    if (X_Motor_Slow) {
-      x = 100;
-      y = -100;
-    } else {
-      x = 150;
-      y = -150;
-    }
-    
-    if (master.get_digital(DIGITAL_R1)) {
-      combine_motor.move_velocity(x);
-    }
-    else if (master.get_digital(DIGITAL_R2)) {
-      combine_motor.move_velocity(y);
-    } else {
-      combine_motor.move_velocity(0);
-    }
-  
-    //Intake control
-     if (master.get_digital(DIGITAL_R1)) {
-      intake_motor.move_velocity(-200);
-    }
-    else if (master.get_digital(DIGITAL_R2)) {
-      intake_motor.move_velocity(200);
-    } else {
-      intake_motor.move_velocity(0);
-    }
+if (X_Motor_Slow) {
+  x = 63;     // was 100 velocity
+  y = -63;
+} else {
+  x = 95;     // was 150 velocity
+  y = -95;
+}
+
+if (master.get_digital(DIGITAL_R1)) {
+  combine_motor.move(x);      // was move_velocity(x)
+}
+else if (master.get_digital(DIGITAL_R2)) {
+  combine_motor.move(y);      // was move_velocity(y)
+} else {
+  combine_motor.move(0);
+}
+
+// Intake control
+if (master.get_digital(DIGITAL_R1)) {
+  intake_motor.move(-127);    // was move_velocity(-200)
+}
+else if (master.get_digital(DIGITAL_R2)) {
+  intake_motor.move(127);     // was move_velocity(200)
+} else {
+  intake_motor.move(0);
+}
 
     // pneumatic control for matchloader
     bool b_button = master.get_digital(DIGITAL_B);

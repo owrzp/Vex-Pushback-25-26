@@ -815,7 +815,7 @@ void SkillsAuton1() {
   combine.move(-20);
   drive(-10.5_in);
   intake.move(127);
-  turn(268_deg);
+  turn(270_deg);
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
   drive(94_in, DRIVE_SPEED);
@@ -860,7 +860,7 @@ void SkillsAuton1() {
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
   pros::delay(800);
-  turn(360_deg);
+  turn(364_deg);
   drive(13.5_in);
   hood.move(-127);
   intake.move(127);
@@ -990,7 +990,10 @@ void SkillsAuton2() {
 
   // Collect Other Blocks
   drive(-12_in);         
-  turn(360_deg);         
+  turn(360_deg);
+  hood.move(-127);
+  intake.move(127);
+  combine.move(-127);         
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
   drive(13.5_in, 60);
