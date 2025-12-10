@@ -959,25 +959,29 @@ void SkillsAuton2() {
   chassis.pid_drive_set(3, 45);
   pros::delay(1000);
   intake.move(40);
+  combine.move(0);
 
   // Back Up
   drive(-20_in);
+  
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
   pros::delay(800);
-
-  turn(235_deg);
-  intake.move(5);
+  hood.move(0);
+  intake.move(127);
   combine.move(0);
+  turn(45_deg);
 
   // =====Move to Next Goal=====
-  drive(20_in);
-  turn(180_deg);
-  drive(-89_in, DRIVE_SPEED);
+  drive(17_in);
+  turn(365_deg);
+  drive(68_in, DRIVE_SPEED);
   turn(-90_deg);
-  drive(-19.5_in);
+  drive(-5_in);
+  chassis.drive_angle_set(-90_deg);
+  drive(15_in);
   turn(180_deg);
-  drive(12.5_in);
+  drive(9.75_in);
 
   hood.move(-127);
   intake.move(127);
@@ -989,14 +993,14 @@ void SkillsAuton2() {
   combine.move(0);
 
   // Collect Other Blocks
-  drive(-12_in);         
+  drive(-12_in);    
+  collectorExtended = true;
+  block_collector.set_value(collectorExtended);     
   turn(360_deg);
   hood.move(-127);
   intake.move(127);
   combine.move(-127);         
-  collectorExtended = true;
-  block_collector.set_value(collectorExtended);
-  drive(13.5_in, 60);
+  drive(15_in, 60);
 
   // Wiggle
   chassis.pid_drive_set(-3, 45);    
@@ -1016,8 +1020,10 @@ void SkillsAuton2() {
 
   chassis.pid_drive_set(3, 45);
   pros::delay(1000);
-  intake.move(40);
 
+  hood.move(0);
+  intake.move(127);
+  combine.move(0);
   // score
   drive(-12_in);
   turn(180_deg);
@@ -1030,7 +1036,7 @@ void SkillsAuton2() {
   combine.move(-127);
   pros::delay(4250);
 
-  // =====Move to Right Side Match Load=====
+  // =====Move to Left Side Match Load=====
   drive(-12_in);
   turn(-90_deg);
   drive(93.67_in, DRIVE_SPEED);
@@ -1039,7 +1045,7 @@ void SkillsAuton2() {
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
   pros::delay(400);
-  // Matchload Right Side
+  // Matchload Left Side
   combine.move(-70);
   intake.move(127);
   drive(13.5_in, 60);
@@ -1063,7 +1069,7 @@ void SkillsAuton2() {
   pros::delay(1000);
   intake.move(127);
 
-  // ===== Move to front Right Side =====
+  // ===== Move to front Left Side =====
   drive(-12.25_in);
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
