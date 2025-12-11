@@ -132,7 +132,7 @@ void autonomous() {
   You can do cool curved motions, but you have to give your robot the best chance
   to be consistent
   */
-  SkillsAuton2();
+  SkillsAuton1();
   // ez::as::auton_selector.selected_auton_call();// Calls selected auton from autonomous selector
 }
 
@@ -287,7 +287,7 @@ else if (master.get_digital(DIGITAL_L2)) {
 }
 
 // Combine control
-bool Xis_pressed = master.get_digital(DIGITAL_X);
+bool Xis_pressed = master.get_digital(DIGITAL_Y);
 
 if (Xis_pressed && !Xwas_pressed) {
     X_Motor_Slow = !X_Motor_Slow; 
@@ -342,7 +342,7 @@ else if (master.get_digital(DIGITAL_R2)) {
     }
 
     // pneumatic control for descore_mech
-    bool up_button = master.get_digital(DIGITAL_UP);
+    bool up_button = master.get_digital(DIGITAL_DOWN);
 	
 	  if (toggle2){
       descore_mech.set_value(true); 
