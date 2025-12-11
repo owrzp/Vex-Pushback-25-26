@@ -874,12 +874,16 @@ void SkillsAuton1() {
   intake.move(127);
   combine.move(-127);
   drive(23_in, DRIVE_SPEED);
+  collectorExtended = true;
+  block_collector.set_value(collectorExtended);
   drive(6.4_in, 30);
   pros::delay(500);
   intake.move(15);
   combine.move(-15);
   hood.move(0);
   drive(-30_in);
+  collectorExtended = false;
+  block_collector.set_value(collectorExtended);
   turn(360_deg);
   drive(14.5_in);
   hood.move(-127);
@@ -975,7 +979,7 @@ void SkillsAuton2() {
   // =====Move to Next Goal=====
   drive(17_in);
   turn(365_deg);
-  drive(68_in, DRIVE_SPEED);
+  drive(68_in, 127);
   turn(-90_deg);
   drive(-5_in);
   chassis.drive_angle_set(-90_deg);
@@ -1077,7 +1081,7 @@ void SkillsAuton2() {
   turn(-55_deg);
   drive(-25_in);
   turn(180_deg);
-  drive(90_in, DRIVE_SPEED);
+  drive(68_in, 127);
   turn(90_deg);
   drive(12_in);
   turn(360_deg);
