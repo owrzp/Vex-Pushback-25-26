@@ -448,15 +448,15 @@ void MatchAutonAWP() {
   drive(28_in, 127);
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
-  pros::delay(100);
   // collect blocks
   combine.move(-127);
   intake.move(127);
   turn(180_deg, 127);
-  drive(11.25_in, 60);
+  drive(14_in, 60);
   // Matchload
   matchload(25);
   pros::delay(200);
+  matchload(0);
   combine.move(-35);
   intake.move(40);
   // ===== Score First Blocks=====
@@ -499,6 +499,7 @@ void MatchAutonAWP() {
   // Matchload
   matchload(25);
   pros::delay(200);
+  matchload(0);
   combine.move(-35);
   intake.move(40);
   drive(-14_in, 127);
