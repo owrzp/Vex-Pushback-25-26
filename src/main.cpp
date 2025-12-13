@@ -323,23 +323,23 @@ else if (master.get_digital(DIGITAL_R2)) {
 }
 
     // pneumatic control for matchloader
-    bool b_button = master.get_digital(DIGITAL_B);
+bool b_button = master.get_digital(DIGITAL_B);
 	
-	  if (toggle){
+  if (toggle){
       block_collector.set_value(true); 
     }
-    else {
+  else {
       block_collector.set_value(false); 
     }
 
-    if (b_button) {
-      if(!latch){ 
+  if (b_button) {
+    if(!latch){ 
         toggle = !toggle;
         latch = true;
       }
-    } else {
+  } else {
       latch = false; 
-    }
+  }
 
     // pneumatic control for descore_mech
     bool up_button = master.get_digital(DIGITAL_DOWN);
