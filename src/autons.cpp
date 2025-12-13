@@ -441,9 +441,6 @@ void matchload(int power) {
 // . . .
 void MatchAutonAWP() {
   bool collectorExtended = false;
-  // Disable slew for faster accel & turns / Set Start Angle
-  chassis.slew_drive_set(false);
-  chassis.slew_swing_set(false);
   chassis.imu.tare_rotation();
   chassis.drive_angle_set(90_deg);
 
@@ -452,20 +449,17 @@ void MatchAutonAWP() {
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
   pros::delay(100);
-
-  // ===== Collect Blocks =====
+  // collect blocks
   combine.move(-127);
   intake.move(127);
   turn(180_deg, 127);
   drive(11.25_in, 60);
-
   // Matchload
   matchload(25);
   pros::delay(200);
   combine.move(-35);
   intake.move(40);
-
-  // ===== Back Up To Score First Blocks=====
+  // ===== Score First Blocks=====
   drive(-12_in, 127);
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
@@ -475,7 +469,6 @@ void MatchAutonAWP() {
   intake.move(127);
   combine.move(-127);
   pros::delay(1000);
-
   // ===== Back Up and Collect Blocks for Upper Middle =====
   drive(-22_in, 127);
   turn(-45_deg, 127);
