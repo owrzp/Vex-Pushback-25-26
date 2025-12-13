@@ -25,6 +25,7 @@ void SkillsAuton2();
 void MatchAutonR2();
 void MatchAutonL2();
 //Helper Functions
+void matchload();
 void wiggle();
 void swingAbsLeft();
 void swingAbsRight();
