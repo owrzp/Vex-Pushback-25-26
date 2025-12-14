@@ -380,10 +380,6 @@ void measure_offsets() {
 }
 
 
-
-
-
-
 // Custom Helper Functions
 void drive(QLength distance, int speed = DRIVE_SPEED, bool slew = true) {
   chassis.pid_drive_set(distance, speed, slew);
@@ -415,7 +411,7 @@ void arcLeftAbs(double deg, int turnSpeed = 90, int insideSpeed = 30) {
   chassis.pid_wait();
 }
 
-//set this around 20-30 for gentle matchloading
+// set this around 20-30 for gentle matchloading
 void matchload(int power) {
   for (auto &m : chassis.left_motors) {
     m.move(power);
@@ -445,7 +441,7 @@ void MatchAutonAWP() {
   chassis.drive_angle_set(90_deg);
 
   // ===== Initial Drive & Collector Deploy =====
-  drive(28_in, 127);
+  drive(31_in, 127);
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
   // collect blocks
@@ -947,24 +943,10 @@ void SkillsAuton2() {
   turn(180_deg);
   drive(12.5_in, 60);
 
-   // Wiggle
-  chassis.pid_drive_set(-3, 45);    
-  pros::delay(200);
-
-  chassis.pid_drive_set(3.25, 45);
-  pros::delay(200);
-
-  chassis.pid_drive_set(-3, 45);
-  pros::delay(200);
-
-  chassis.pid_drive_set(3, 45);
-  pros::delay(200);
-
-  chassis.pid_drive_set(-3, 45);
-  pros::delay(200);
-
-  chassis.pid_drive_set(3, 45);
-  pros::delay(1000);
+   // Matchload
+  matchload(25);
+  pros::delay(3000);
+  matchload(0);
   intake.move(40);
   combine.move(0);
 
@@ -1009,25 +991,10 @@ void SkillsAuton2() {
   combine.move(-127);         
   drive(15_in, 60);
 
-  // Wiggle
-  chassis.pid_drive_set(-3, 45);    
-  pros::delay(200);
-
-  chassis.pid_drive_set(3.25, 45);
-  pros::delay(200);
-
-  chassis.pid_drive_set(-3, 45);
-  pros::delay(200);
-
-  chassis.pid_drive_set(3, 45);
-  pros::delay(200);
-
-  chassis.pid_drive_set(-3, 45);
-  pros::delay(200);
-
-  chassis.pid_drive_set(3, 45);
-  pros::delay(1000);
-
+   // Matchload
+  matchload(25);
+  pros::delay(3000);
+  matchload(0);
   hood.move(0);
   intake.move(127);
   combine.move(0);
@@ -1053,28 +1020,15 @@ void SkillsAuton2() {
   block_collector.set_value(collectorExtended);
   pros::delay(400);
   // Matchload Left Side
-  combine.move(-70);
+  combine.move(-120);
   intake.move(127);
   drive(13.5_in, 60);
-   // Wiggle
-  chassis.pid_drive_set(-3, 45);    
-  pros::delay(200);
-
-  chassis.pid_drive_set(3.25, 45);
-  pros::delay(200);
-
-  chassis.pid_drive_set(-3, 45);
-  pros::delay(200);
-
-  chassis.pid_drive_set(3, 45);
-  pros::delay(200);
-
-  chassis.pid_drive_set(-3, 45);
-  pros::delay(200);
-
-  chassis.pid_drive_set(3, 45);
-  pros::delay(1000);
-  intake.move(127);
+   // Matchload
+  matchload(25);
+  pros::delay(3000);
+  matchload(0);
+  intake.move(40);
+  combine.move(0);
 
   // ===== Move to front Left Side =====
   drive(-12.25_in);
@@ -1101,24 +1055,12 @@ void SkillsAuton2() {
   block_collector.set_value(collectorExtended);
   drive(13.5_in);
 
-    // Wiggle
-  chassis.pid_drive_set(-3, 45);    
-  pros::delay(200);
-
-  chassis.pid_drive_set(3.25, 45);
-  pros::delay(200);
-
-  chassis.pid_drive_set(-3, 45);
-  pros::delay(200);
-
-  chassis.pid_drive_set(3, 45);
-  pros::delay(200);
-
-  chassis.pid_drive_set(-3, 45);
-  pros::delay(200);
-
-  chassis.pid_drive_set(3, 45);
-  pros::delay(1000);
+    // Matchload
+  matchload(25);
+  pros::delay(3000);
+  matchload(0);
+  intake.move(40);
+  combine.move(0);
   intake.move(127);
 
   // Score Front Right Side Blocks
