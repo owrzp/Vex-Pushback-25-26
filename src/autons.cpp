@@ -432,7 +432,7 @@ void matchload(int power) {
   // block_collector.set_value(collectorExtended);
   // pros::delay(300);
 
- // . . .
+  // . . .
 // Make your own autonomous functions here!
 // . . .
 void MatchAutonAWP() {
@@ -451,7 +451,7 @@ void MatchAutonAWP() {
   drive(14_in, 60);
   // Matchload
   matchload(25);
-  pros::delay(200);
+  pros::delay(2000);
   matchload(0);
   combine.move(-35);
   intake.move(40);
@@ -488,13 +488,13 @@ void MatchAutonAWP() {
 // ===== Collect and Score Upper Left Blocks =====
   drive(-51_in, 127);
   turn(-180_deg, 127);
-  // ===== Collect Second Set Blocks =====
+  // Collect Second Set Blocks
   intake.move(127);
   combine.move(-127);
   drive(15_in, DRIVE_SPEED_MEDIUM);
   // Matchload
   matchload(25);
-  pros::delay(200);
+  pros::delay(2000);
   matchload(0);
   combine.move(-35);
   intake.move(40);
@@ -938,12 +938,13 @@ void SkillsAuton2() {
   pros::delay(500);
 
   // Collect Blocks 
-  combine.move(-70);
+  combine.move(-45);
   intake.move(100);
   turn(180_deg);
-  drive(12.5_in, 60);
+  drive(13.5_in, 60);
 
    // Matchload
+  pros::delay(50);
   matchload(25);
   pros::delay(3000);
   matchload(0);
@@ -968,7 +969,7 @@ void SkillsAuton2() {
   turn(-90_deg);
   drive(-5_in);
   chassis.drive_angle_set(-90_deg);
-  drive(15_in);
+  drive(17_in);
   turn(180_deg);
   drive(9.75_in);
 
@@ -988,7 +989,7 @@ void SkillsAuton2() {
   turn(360_deg);
   hood.move(-127);
   intake.move(127);
-  combine.move(-127);         
+  combine.move(-50);         
   drive(15_in, 60);
 
    // Matchload
@@ -1013,16 +1014,16 @@ void SkillsAuton2() {
   // =====Move to Left Side Match Load=====
   drive(-12_in);
   turn(-90_deg);
-  drive(93.67_in, DRIVE_SPEED);
+  drive(94_in, DRIVE_SPEED);
   turn(360_deg);
  
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
   pros::delay(400);
   // Matchload Left Side
-  combine.move(-120);
+  combine.move(-40);
   intake.move(127);
-  drive(13.5_in, 60);
+  drive(18_in, 60);
    // Matchload
   matchload(25);
   pros::delay(3000);
@@ -1035,14 +1036,16 @@ void SkillsAuton2() {
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
   pros::delay(450);
-  turn(-55_deg);
+  turn(55_deg);
   drive(-25_in);
   turn(180_deg);
   drive(68_in, 127);
   turn(90_deg);
-  drive(12_in);
+  drive(-5_in);
+  chassis.drive_angle_set(90_deg);
+  drive(15_in);
   turn(360_deg);
-  drive(12.5_in);
+  drive(9.75_in);
   hood.move(-127);
   intake.move(127);
   combine.move(-127);
@@ -1053,7 +1056,7 @@ void SkillsAuton2() {
   turn(180_deg);
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
-  drive(13.5_in);
+  drive(19_in);
 
     // Matchload
   matchload(25);
@@ -1090,7 +1093,6 @@ void SkillsAuton2() {
   combine.move(-127);
   drive(56_in, 127);
   pros::delay(4000);
-
 }
 
   void Autonomous() {
