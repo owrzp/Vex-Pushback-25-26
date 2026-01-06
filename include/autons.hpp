@@ -17,13 +17,13 @@ void measure_offsets();
 
 //Match/Skills Autonomous Routes
 void MatchAutonAWP();
-void MatchAutonR();
-void MatchAutonL();
+void QualAutonR();
+void QualAutonL();
 void SkillsAutonPark();
 void SkillsAuton1();
 void SkillsAuton2();
-void MatchAutonR2();
-void MatchAutonL2();
+void MatchAutonR();
+void MatchAutonL();
 //Helper Functions
 void matchload();
 void wiggle();

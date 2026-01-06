@@ -35,6 +35,7 @@ ez::Drive chassis(
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
+   ez::ez_template_print();
 
   pros::delay(500);  // Stop the user from doing anything while legacy ports configure
 
@@ -73,9 +74,11 @@ void initialize() {
     Auton("Drive Example", drive_example),
     Auton("Turn Example", turn_example),
     Auton("Swing Example", swing_example),
+    Auton("Qualifier Auton Left", QualAutonL),
+    Auton("Qualifier Auton Right", QualAutonR),
     Auton("Match Auto AWP", MatchAutonAWP),
-    Auton("Match Auto Right", MatchAutonR2),
-    Auton("Match Auto Left", MatchAutonL2),
+    Auton("Match Auto Right", MatchAutonR),
+    Auton("Match Auto Left", MatchAutonL),
 
   });
 
