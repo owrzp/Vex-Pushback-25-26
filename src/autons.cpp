@@ -411,6 +411,9 @@ void arcLeftAbs(double deg, int turnSpeed = 90, int insideSpeed = 30) {
   chassis.pid_wait();
 }
 
+
+int distance_mm = front_distance.get();
+
 // set this around 20-30 for gentle matchloading
 void matchload(int power) {
   for (auto &m : chassis.left_motors) {
@@ -1027,57 +1030,29 @@ chassis.pid_drive_set(-1, 127);
   drive(-12.25_in);
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
-  turn(55_deg);
-  drive(-25_in);
-  turn(180_deg,127);
-  drive(68_in, 127);
-  turn(90_deg,127);
-  drive(-8_in,127);
-  chassis.drive_angle_set(90_deg);
-  drive(16.75_in);
-  turn(360_deg);
-  drive(5_in);
-  hood.move(-127);
-  intake.move(127);
-  combine.move(-127);
-  pros::delay(4250);
-
-  // Matchload Back Left Side
-  drive(-12_in);
-  collectorExtended = true;
-  block_collector.set_value(collectorExtended);
   turn(180_deg);
-  drive(19_in,60);
-
-    // Matchload
-  matchload(25);
-  pros::delay(3000);
-  matchload(0);
-  intake.move(40);
-  combine.move(0);
-  intake.move(127);
-
-  // Score Front Left Side Blocks
-  drive(-12_in);
-  turn(360_deg);
-  collectorExtended = false;
-  block_collector.set_value(collectorExtended);
-  drive(14_in);
+  drive(14.5_in);
   hood.move(-127);
   intake.move(127);
-  combine.move(-127);
-  pros::delay(4250);
-
-  // =====Park Robot=====
-  drive(-10_in,127);
-  turn(90_deg);
-  drive(47_in, 127);
-  turn(180_deg);
-  drive(40_in, 127);
-  hood.move(-127);
-  intake.move(127);
-  combine.move(-127);
-  pros::delay(4000);
+  combine.move(-110);
+  pros::delay(2500);
+  drive(-15_in);
+  turn(135_deg);
+    combine.move(127);
+   intake.move(-127); 
+  drive(24_in);  
+   drive(15_in);
+   combine.move(127);
+   intake.move(-127);
+   pros::delay(2000);
+   drive(-15_in);
+   turn(180_deg);
+   drive(68_in);
+   turn(90_deg);
+   drive(16_in);
+   turn(180_deg);
+   drive(60_in);
+  pros::delay(2000);
 }
 
   void Autonomous() {

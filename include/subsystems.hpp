@@ -14,3 +14,7 @@ extern Drive chassis;
     inline pros::Motor hood(3);
     inline pros::adi::Pneumatics block_collector('A', false); // Pneumatic for the block collector
     inline pros::adi::Pneumatics descore_mech('B', false); // Pneumatic for the mobile goal lift
+    inline pros::Distance front_distance(7);
+    inline pros::Distance right_distance(8);
+
+// Distance Sensor Abstraction
