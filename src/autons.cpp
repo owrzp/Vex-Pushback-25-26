@@ -14,6 +14,8 @@ const int SWING_SPEED = 110;
 const int DRIVE_SPEED = 110;
 const int DRIVE_SPEED_SLOW = 40;
 const int DRIVE_SPEED_MEDIUM = 65;
+ 
+
 
 ///
 // Constants
@@ -411,8 +413,17 @@ void arcLeftAbs(double deg, int turnSpeed = 90, int insideSpeed = 30) {
   chassis.pid_wait();
 }
 
+void correct(double desired_dist, double precision) {
+  // could loop this or just call it twice
+  double dist = front_distance.get(); // 15.5
+  double error = desired_dist - dist;  // 10-15.5
+  if (std::abs(error) < precision) { // 5.5 < 0.1
+    return;
+  }
+  QLength qDist = error * okapi::millimeter;
 
-int distance_mm = front_distance.get();
+  drive(qDist);
+}
 
 // set this around 20-30 for gentle matchloading
 void matchload(int power) {
@@ -926,6 +937,8 @@ void SkillsAuton2() {
   intake.move(100);
   turn(180_deg);
   drive(13.5_in, 60);
+
+  // correct(10, 1);
 
    // Matchload
 chassis.pid_drive_set(-1, 127);    

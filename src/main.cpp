@@ -1,4 +1,5 @@
 #include "main.h"
+#include <algorithm>
 pros::Controller master(pros::E_CONTROLLER_MASTER);
 #define COMBINE_MOTOR_PORT 4
 #define HOOD_MOTOR_PORT 3
@@ -34,6 +35,8 @@ ez::Drive chassis(
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
+
+
 void initialize() {
    ez::ez_template_print();
 

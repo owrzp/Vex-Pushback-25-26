@@ -33,4 +33,5 @@ void drive();
 void turn();
 void arcRightAbs();
 void arcLeftAbs();
+void correct();
 
