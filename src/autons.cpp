@@ -6,6 +6,9 @@ using namespace okapi;
 // https://ez-robotics.github.io/EZ-Template/
 /////
 
+// IMU Defined
+pros::Imu imu(5);
+
 // These are out of 127
 const int TURN_SPEED = 90;
 const int TURN_SPEED_SLOW = 60;
@@ -413,7 +416,10 @@ void arcLeftAbs(double deg, int turnSpeed = 90, int insideSpeed = 30) {
   chassis.pid_wait();
 }
 
-void correct(double desired_dist, double precision) {
+
+// Distance Sensor Corrections
+
+void correctFront(double desired_dist, double precision) {
   // could loop this or just call it twice
   double dist = front_distance.get(); // 15.5
   double error = desired_dist - dist;  // 10-15.5
@@ -424,6 +430,8 @@ void correct(double desired_dist, double precision) {
 
   drive(qDist);
 }
+
+
 
 // set this around 20-30 for gentle matchloading
 void matchload(int power) {
@@ -586,7 +594,7 @@ drive(17.5_in, DRIVE_SPEED_SLOW);
 pros::delay(350);
   // ===== Score First Block =====
  turn(-45_deg);
- drive(14.75_in, DRIVE_SPEED);
+ drive(13.5_in, DRIVE_SPEED);
  intake.move(-127);
 combine.move(127);
  pros::delay(2000);
@@ -617,7 +625,7 @@ combine.move(127);
   block_collector.set_value(collectorExtended);
   pros::delay(300);
   // ===== Score Second Set Blocks =====
-  drive(10.25_in);
+  drive(10.5_in);
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
 
   intake.move(127);
@@ -628,71 +636,13 @@ combine.move(127);
 
 void QualAutonL() {
   bool collectorExtended = false;
-
-  // ===== Collect First Set Blocks =====
-  intake.move(80);
-  combine.move(-80);
-  drive(28_in, DRIVE_SPEED_SLOW);
-  intake.move(40);
-  combine.move(-40);
-  pros::delay(250);
-
-  // ===== Deploy Collector =====
-  collectorExtended = true;
-  block_collector.set_value(collectorExtended);
-  pros::delay(800);
-
-  // ===== Score First Block =====
-  turn(65.5_deg);
-  drive(14_in, DRIVE_SPEED_MEDIUM);
-  hood.move(90);
-  intake.move(127);
-  combine.move(-127);
-  pros::delay(3000);
-  intake.move(0);
-  combine.move(0);
-
-  // ===== Drive to Matchloader =====
-  drive(-48_in);
-  turn(200_deg);
-
-  // ===== Collect Second Set Blocks =====
-  intake.move(127);
-  combine.move(-127);
-  drive(17_in, DRIVE_SPEED_MEDIUM);
-  drive(-3_in);
-  drive(5_in);
-  drive(-3_in);
-  combine.move(0);
-  intake.move(20);
-  hood.move(90);
-
-  drive(-14_in);
-  pros::delay(2500);
-  // ===== Retract Collector =====
-  collectorExtended = false;
-  block_collector.set_value(collectorExtended);
-  pros::delay(800);
-
-  // ===== Score Second Set Blocks =====
-  turn(360_deg);
-  drive(8.67_in, DRIVE_SPEED);
-  chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
-  intake.move(127);
-  combine.move(-100);
-  hood.move(-127);
-  pros::delay(3000);
-}
-
-void MatchAutonL() {
-  bool collectorExtended = false;
   chassis.imu.tare_rotation();
   chassis.drive_angle_set(-90_deg);
 
   // Initial Drive & Collector Deploy 
   collectorExtended = true;
   block_collector.set_value(collectorExtended);
-  pros::delay(200);
+  pros::delay(400);
   drive(30_in, 127);
   // collect blocks
   combine.move(-65);
@@ -701,7 +651,7 @@ void MatchAutonL() {
   drive(14_in, 70);
   // Matchload
   matchload(25);
-  pros::delay(200);
+  pros::delay(500);
   matchload(0);
   combine.move(-60);
   intake.move(40);
@@ -730,6 +680,60 @@ pros::delay(300);
   descore_mech.set_value(false);  // extend / go up
   drive(12_in,127);
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
+}
+
+void MatchAutonL() {
+  bool collectorExtended = false;
+  chassis.slew_swing_set(true);  // Enables global slew
+  chassis.imu.tare_rotation();
+
+ // ===== Path to First Blocks =====
+  intake.move(127);
+  combine.move(-60);
+drive(9_in);              
+turn(-30_deg);
+drive(16_in, DRIVE_SPEED_MEDIUM);
+pros::delay(300);
+  // ===== Score First Block =====
+ turn(45_deg);
+ collectorExtended = true;
+block_collector.set_value(collectorExtended);
+ drive(15.65_in, DRIVE_SPEED);
+ intake.move(100);
+combine.move(-127);
+hood.move(90);
+ pros::delay(2000);
+ intake.move(20);
+combine.move(10);
+  // ===== Drive to Matchloader =====
+  drive(-49.5_in);
+  collectorExtended = true;
+  block_collector.set_value(collectorExtended);
+  pros::delay(400);
+  turn(-180_deg);
+  // ===== Collect Second Set Blocks =====
+ intake.move(100);
+ combine.move(-60);
+  drive(15.5_in, 95);
+  drive(-2_in);
+  drive(2_in);
+  matchload(25);
+  combine.move(0);
+  intake.move(60);
+  drive(-14_in);
+  turn(360_deg);
+  // ===== Retract Collector =====
+  collectorExtended = false;
+  block_collector.set_value(collectorExtended);
+  pros::delay(800);
+  // ===== Score Second Set Blocks =====
+  drive(9.5_in);
+  chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
+
+  intake.move(127);
+  combine.move(-127);
+  hood.move(-127);
+  pros::delay(2000);
 }
 
 void SkillsAutonPark() {
@@ -970,9 +974,9 @@ chassis.pid_drive_set(-1, 127);
   turn(-90_deg);
   drive(-4.5_in);
   chassis.drive_angle_set(-90_deg);
-  drive(17_in);
+  drive(16.5_in);
   turn(180_deg);
-  drive(8.75_in);
+  drive(8_in);
 
   hood.move(-127);
   intake.move(127);
@@ -1048,21 +1052,17 @@ chassis.pid_drive_set(-1, 127);
   hood.move(-127);
   intake.move(127);
   combine.move(-110);
-  pros::delay(2500);
+  pros::delay(4000);
+  // score middle goal
   drive(-15_in);
   turn(135_deg);
     combine.move(127);
    intake.move(-127); 
   drive(24_in);  
-   drive(15_in);
-   combine.move(127);
-   intake.move(-127);
-   pros::delay(2000);
-   drive(-15_in);
    turn(180_deg);
    drive(68_in);
    turn(90_deg);
-   drive(16_in);
+   drive(27_in);
    turn(180_deg);
    drive(60_in);
   pros::delay(2000);

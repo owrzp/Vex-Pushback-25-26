@@ -71,12 +71,8 @@ void initialize() {
   master.rumble(chassis.drive_imu_calibrated() ? "." : "---");
 
   ez::as::auton_selector.autons_add({
-    Auton("Skills Auton Park", SkillsAutonPark),
-    Auton("Skills Auton 1", SkillsAuton1),
     Auton("Skills Auton 2", SkillsAuton2),
-    Auton("Drive Example", drive_example),
-    Auton("Turn Example", turn_example),
-    Auton("Swing Example", swing_example),
+    Auton("Skills Auton Park", SkillsAutonPark),
     Auton("Qualifier Auton Left", QualAutonL),
     Auton("Qualifier Auton Right", QualAutonR),
     Auton("Match Auto AWP", MatchAutonAWP),
@@ -86,7 +82,6 @@ void initialize() {
   });
 
 }
-
 /**
  * Runs while the robot is in the disabled state of Field Management System or
  * the VEX Competition Switch, following either autonomous or opcontrol. When
@@ -138,8 +133,8 @@ void autonomous() {
   You can do cool curved motions, but you have to give your robot the best chance
   to be consistent
   */
-  SkillsAuton2();
-  // ez::as::auton_selector.selected_auton_call();// Calls selected auton from autonomous selector
+  // MatchAutonL();
+  ez::as::auton_selector.selected_auton_call();// Calls selected auton from autonomous selector
 }
 
 /**
