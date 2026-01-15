@@ -431,6 +431,31 @@ void correctFront(double desired_dist, double precision) {
   drive(qDist);
 }
 
+void correctRight(double desired_dist, double precision) {
+  turn(90_deg);
+  double dist = front_distance.get(); // 15.5
+  double error = desired_dist - dist;
+  if (std::abs(error) < precision) { 
+    return;
+  }
+  QLength qDist = error * okapi::millimeter;
+
+  drive(qDist);
+
+}
+
+void correctLeft(double desired_dist, double precision) {
+  turn(-90_deg);
+  double dist = front_distance.get_confidence();
+  double error = desired_dist - dist;
+  if (std::abs(error) < precision) {
+    return;
+  }
+  QLength qDist = error * okapi::millimeter;
+
+  drive(qDist);
+
+}
 
 
 // set this around 20-30 for gentle matchloading
@@ -937,7 +962,7 @@ void SkillsAuton2() {
   pros::delay(500);
 
   // Collect Blocks 
-  combine.move(-60);
+  combine.move(-65);
   intake.move(100);
   turn(180_deg);
   drive(13_in, 60);
@@ -970,15 +995,12 @@ chassis.pid_drive_set(-1, 127);
 
   // =====Move to Next Goal=====
   drive(17_in,127);
-  turn(365_deg);
+  turn(363_deg);
   drive(75_in, 127);
-  turn(-90_deg);
-  drive(-4.5_in);
-  chassis.drive_angle_set(-90_deg);
-  drive(16.5_in, 100);
+  turn(90_deg);
+  correctFront(-309, 0.5);
   turn(180_deg);
-  drive(4_in);
-
+  drive(2.75_in);
   hood.move(-127);
   intake.move(127);
   combine.move(-110);
@@ -1000,11 +1022,14 @@ chassis.pid_drive_set(-1, 127);
   drive(15_in, 60);
 
    // Matchload
+chassis.pid_drive_set(-1, 127);    
+  pros::delay(50);
+
+  chassis.pid_drive_set(4.5, 127);
   matchload(25);
   pros::delay(3000);
   matchload(0);
-  hood.move(0);
-  intake.move(127);
+  intake.move(40);
   combine.move(0);
   // score
   drive(-12_in);
@@ -1023,7 +1048,7 @@ chassis.pid_drive_set(-1, 127);
   turn(-90_deg);
   combine.move(127);
   intake.move(-127);
-  drive(94_in, 127);
+  drive(95_in);
   turn(360_deg);
  
   collectorExtended = true;
@@ -1032,7 +1057,7 @@ chassis.pid_drive_set(-1, 127);
   // Matchload Left Side
   combine.move(-40);
   intake.move(127);
-  drive(18_in, 60);
+  drive(16.5_in, 60);
    // Matchload
 chassis.pid_drive_set(-1, 127);    
   pros::delay(50);
@@ -1044,7 +1069,7 @@ chassis.pid_drive_set(-1, 127);
   intake.move(40);
   combine.move(0);
 
-  // ===== Move to front Left Side =====
+   // ===== Move to front Left Side =====
   drive(-12.25_in);
   collectorExtended = false;
   block_collector.set_value(collectorExtended);
@@ -1062,12 +1087,13 @@ chassis.pid_drive_set(-1, 127);
   drive(24_in);  
    turn(180_deg);
    drive(68_in);
-   turn(90_deg);
-   drive(27_in);
+   turn(90_deg,90);
+   drive(25.5_in);
    turn(180_deg);
    drive(60_in);
   pros::delay(2000);
 }
+
 
   void Autonomous() {
   chassis.pid_targets_reset();                // Resets PID targets to 0

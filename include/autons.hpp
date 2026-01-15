@@ -34,4 +34,6 @@ void turn();
 void arcRightAbs();
 void arcLeftAbs();
 void correctFront();
-void correctWithIMU();
+void correctRight();
+void correctLeft();
+void correctedFront();
